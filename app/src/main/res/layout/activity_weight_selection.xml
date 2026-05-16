@@ -15,25 +15,22 @@
         android:layout_height="48dp"
         android:src="@drawable/baseline_arrow_back_ios_24"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:tint="#1E40AF"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="12dp"
         android:layout_marginStart="16dp" />
 
-    <!-- Next Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
+    <TextView
+        android:id="@+id/tv_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Next"
-        android:textSize="16sp"
-        app:backgroundTint="#1E88E5"
-        app:cornerRadius="30dp"
+        android:text="Step 3 of 5"
+        android:textSize="15sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -48,7 +45,8 @@
         android:lineSpacingExtra="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginVertical="0dp" />
+        android:layout_marginVertical="0dp"
+        tools:ignore="MissingConstraints" />
 
     <!-- Info Card -->
     <androidx.cardview.widget.CardView
@@ -91,59 +89,80 @@
 
     <!-- Weight Picker Container -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/weight_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/info_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="48dp">
+        android:layout_marginTop="48dp"
+        android:layout_marginHorizontal="32dp">
 
-        <!-- Previous Value -->
+        <!-- Large Age Display -->
         <TextView
-            android:id="@+id/tv_prev"
+            android:id="@+id/tv_weight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="59"
-            android:textSize="28sp"
-            android:textColor="#94A3B8"
+            android:text="0"
+            android:textSize="96sp"
+            android:textColor="#03A9F4"
+            android:textStyle="bold"
+            android:letterSpacing="-0.04"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Current Weight -->
-        <LinearLayout
-            android:id="@+id/weigh"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/tv_prev"
+            android:text="Kilograms"
+            android:textSize="19sp"
+            android:textColor="#64748B"
+            app:layout_constraintTop_toBottomOf="@id/tv_weight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="4dp" />
 
-            <TextView
-                android:id="@+id/tv_weight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="68"
-                android:textSize="88sp"
-                android:textColor="#03A9F4"
-                android:textStyle="bold"
-                android:letterSpacing="-0.03" />
+        <!-- Slider -->
+        <com.google.android.material.slider.Slider
+            android:id="@+id/weight_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:valueFrom="0"
+            android:valueTo="230"
+            android:value="0"
+            android:stepSize="1"
+            app:trackHeight="12dp"
+            app:thumbRadius="16dp"
+            app:trackColorInactive="#E2E8F0"
+            app:trackColorActive="#03A9F4"
+            app:thumbColor="#64B5F4"
+            app:haloColor="#93C5FD"
+            app:labelBehavior="gone"
+            app:layout_constraintTop_toBottomOf="@id/tv_weight"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="48dp" />
 
-            <TextView
-                android:id="@+id/tv_unit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="kg"
-                android:textSize="34sp"
-                android:textColor="#64748B"
-                android:textStyle="italic|bold"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="22dp" />
+        <!-- Min & Max -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#94A3B8"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/weight_slider"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="12dp" />
 
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="230"
+            android:textColor="#94A3B8"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/weight_slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp" />
 
         <!-- Next Value -->
         <TextView

@@ -19,21 +19,17 @@
         android:layout_marginTop="12dp"
         android:layout_marginStart="16dp" />
 
-    <!-- Next Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
+    <TextView
+        android:id="@+id/tv_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Next"
-        android:textSize="16sp"
-        app:backgroundTint="#1E88E5"
-        app:cornerRadius="30dp"
+        android:text="Step 2 of 5"
+        android:textSize="15sp"
+        android:textColor="#666666"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Progress Bar -->
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp" />
 
     <!-- Title -->
     <TextView

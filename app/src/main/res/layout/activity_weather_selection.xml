@@ -91,12 +91,12 @@
 
         <!-- Hot -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/option_hot"
+            android:id="@+id/temptHot"
             android:layout_width="match_parent"
             android:layout_height="110dp"
             app:cardCornerRadius="28dp"
             app:cardElevation="12dp"
-            app:cardBackgroundColor="#F97316"
+            app:cardBackgroundColor="#FFFFFF"
             android:layout_marginBottom="16dp">
 
             <LinearLayout
@@ -119,7 +119,7 @@
                     android:layout_weight="1"
                     android:text="Hot"
                     android:textSize="20sp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#1E2937"
                     android:textStyle="bold"
                     android:layout_marginStart="20dp" />
 
@@ -128,7 +128,7 @@
 
         <!-- Temperate -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/option_temperate"
+            android:id="@+id/temptMild"
             android:layout_width="match_parent"
             android:layout_height="88dp"
             app:cardCornerRadius="28dp"
@@ -154,7 +154,7 @@
                     android:layout_width="0dp"
                     android:layout_height="32dp"
                     android:layout_weight="1"
-                    android:text="Temperate"
+                    android:text="Mild"
                     android:textSize="20sp"
                     android:textColor="#1E2937"
                     android:textStyle="bold"
@@ -165,7 +165,7 @@
 
         <!-- Cold -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/option_cold"
+            android:id="@+id/temptCold"
             android:layout_width="match_parent"
             android:layout_height="88dp"
             app:cardCornerRadius="28dp"

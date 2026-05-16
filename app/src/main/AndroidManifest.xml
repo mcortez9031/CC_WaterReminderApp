@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WaterReminder"
         tools:targetApi="31">
-
+        <activity
+            android:name=".UserLogIn"
+            android:exported="false" />
         <activity
             android:name=".WeightSelection"
             android:exported="false" />
@@ -32,10 +34,10 @@
             android:name=".AgeSelection"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false"/>
+            android:name=".SignUpPage"
+            android:exported="false" />
         <activity
-            android:name=".UserLogIn"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

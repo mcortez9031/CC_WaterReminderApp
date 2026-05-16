@@ -62,7 +62,7 @@
 
         <!-- Option 1 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/option_rarely"
+            android:id="@+id/optRarely"
             android:layout_width="0dp"
             android:layout_height="172dp"
             android:layout_columnWeight="1"
@@ -86,7 +86,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sedentary"
+                    android:text="Rarely"
                     android:textSize="17sp"
                     android:textColor="#1E2937"
                     android:textStyle="bold"
@@ -105,7 +105,7 @@
 
         <!-- Option 2 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/option_light"
+            android:id="@+id/optLight"
             android:layout_width="0dp"
             android:layout_height="172dp"
             android:layout_columnWeight="1"
@@ -148,14 +148,14 @@
 
         <!-- Option 3 - Selected -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/option_moderate"
+            android:id="@+id/optModerate"
             android:layout_width="0dp"
             android:layout_height="172dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
             app:cardCornerRadius="24dp"
             app:cardElevation="12dp"
-            app:cardBackgroundColor="#2563EB">
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:text="Moderate"
                     android:textSize="17sp"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#040404"
                     android:textStyle="bold"
                     android:layout_marginTop="12dp" />
 
@@ -183,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:text="3–4 days"
                     android:textSize="14sp"
-                    android:textColor="#BFDBFE"
+                    android:textColor="#64748B"
                     android:layout_marginTop="4dp" />
 
             </LinearLayout>
@@ -191,7 +191,7 @@
 
         <!-- Option 4 -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/option_active"
+            android:id="@+id/optActive"
             android:layout_width="0dp"
             android:layout_height="172dp"
             android:layout_columnWeight="1"

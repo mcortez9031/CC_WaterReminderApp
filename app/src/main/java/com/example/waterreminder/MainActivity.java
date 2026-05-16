@@ -1,5 +1,6 @@
 package com.example.waterreminder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -19,5 +20,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         next=findViewById(R.id.btn_next);
+        next.setOnClickListener(v ->{
+            Intent intent= new Intent(MainActivity.this, UserLogIn.class);
+        });
     }
 }
