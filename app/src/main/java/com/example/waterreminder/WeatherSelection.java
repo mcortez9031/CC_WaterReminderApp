@@ -34,7 +34,7 @@ ImageView back;
         next.setOnClickListener(v -> {
             SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("Temperature", tempt);
+            editor.putString("weather", tempt);
             editor.apply();
             Intent intent = new Intent(WeatherSelection.this, SignUpPage.class);
             startActivity(intent);

@@ -35,41 +35,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="90dp" />
 
-    <!-- Unit Toggle -->
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/unit_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:singleSelection="true"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
-        >
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_ml"
-            android:text="ml"
-            style="@style/Widget.Material3.Button.OutlinedButton" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_l"
-            android:text="L"
-            style="@style/Widget.Material3.Button.OutlinedButton" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_us_oz"
-            android:text="US oz"
-            android:checked="true"
-            style="@style/Widget.Material3.Button.OutlinedButton" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_uk_oz"
-            android:text="UK oz"
-            style="@style/Widget.Material3.Button.OutlinedButton" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-
     <!-- Goal Value -->
     <TextView
         android:id="@+id/tv_goal"
@@ -79,24 +44,24 @@
         android:textSize="96sp"
         android:textColor="#514D4D"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/unit_group"
+        app:layout_constraintTop_toBottomOf="@id/info_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="203dp" />
+        android:layout_marginTop="105dp" />
 
     <!-- Info Card -->
     <TextView
         android:id="@+id/tv_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="18dp"
         android:text="mL"
         android:textColor="#BAE6FD"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/tv_goal"
-        app:layout_constraintStart_toEndOf="@id/tv_goal" />
+        app:layout_constraintStart_toEndOf="@id/tv_goal"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="18dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/info_card"

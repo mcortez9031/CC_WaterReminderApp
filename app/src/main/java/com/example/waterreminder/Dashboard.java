@@ -4,7 +4,9 @@ import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
@@ -23,6 +25,9 @@ public class Dashboard extends AppCompatActivity {
     EditText etAmount;
     Button btnAdd, btnReminder;
     DatabaseHelper databaseHelper;
+    int dailyGoal;
+    String email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +40,12 @@ public class Dashboard extends AppCompatActivity {
         btnAdd = findViewById(R.id.btnAdd);
         btnReminder = findViewById(R.id.btnReminder);
         databaseHelper = new DatabaseHelper(this);
+        SharedPreferences sharedPref = getSharedPreferences("user_profile", Context.MODE_PRIVATE);
+        email = sharedPref.getString("email", "");
+        dailyGoal = databaseHelper.waterGoal(email);
 
         createNotificationChannel();
         updateUI();
-
 
         btnAdd.setOnClickListener(v -> {
 
@@ -48,7 +55,7 @@ public class Dashboard extends AppCompatActivity {
 
                 int amount = Integer.parseInt(input);
 
-                databaseHelper.addLog(amount);
+                databaseHelper.addLog(amount, email);
 
                 etAmount.setText("");
 
@@ -83,20 +90,15 @@ public class Dashboard extends AppCompatActivity {
         });
     }
 
-
-    static final int DAILY_GOAL = 2000;
-
-
-
     private void updateUI() {
 
-        int total = databaseHelper.getDailyTotal();
+        int total = databaseHelper.getDailyTotal(email);
 
-        tvWaterIntake.setText(total + " / " + DAILY_GOAL + " ml");
+        tvWaterIntake.setText(total + " / " + dailyGoal + " ml");
 
-        progressBar.setMax(DAILY_GOAL);
+        progressBar.setMax(dailyGoal);
 
-        progressBar.setProgress(total);
+        progressBar.setProgress(Math.min(total, dailyGoal));
     }
 
     // AlarmManager Reminder
@@ -182,3 +184,4 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 }
+

@@ -62,7 +62,7 @@ public class WeightSelection extends AppCompatActivity {
             btnContinue.setOnClickListener(v -> {
                 int selectedWeight = (int) weightSlider.getValue();
 
-                saveAgeToPreferences(selectedWeight);
+                saveWeightToPreferences(selectedWeight);
 
                 Toast.makeText(WeightSelection.this,
                         "Weight selected: " + selectedWeight + " kg",
@@ -73,11 +73,10 @@ public class WeightSelection extends AppCompatActivity {
             });
         }
 
-        private void saveAgeToPreferences(int age) {
+        private void saveWeightToPreferences(int weight) {
             SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putInt("user_age", age);
+            editor.putInt("weight", weight);
             editor.apply();
-
         }
     }

@@ -51,7 +51,7 @@
         android:layout_height="24dp"
         android:layout_marginTop="5dp"
         android:max="2000"
-        android:progress="800"
+        android:progress="0"
         android:progressTint="#55B1FC"
         android:layout_marginBottom="32dp"/>
 

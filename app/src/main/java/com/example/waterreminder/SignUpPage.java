@@ -27,7 +27,7 @@ public class SignUpPage extends AppCompatActivity {
     AlertDialog.Builder successMessage;
 
     String gender, activity_level, weather;
-    int weight;
+    int weight, age;
     double water_goal;
 
     DatabaseHelper databaseHelper;
@@ -102,8 +102,11 @@ public class SignUpPage extends AppCompatActivity {
             SharedPreferences sharedPref = getSharedPreferences("user_profile", Context.MODE_PRIVATE);
             gender = sharedPref.getString("gender", "Not Specified");
             weight = sharedPref.getInt("weight", 60);
-            activity_level = sharedPref.getString("activity_level", "Moderate");
+            activity_level = sharedPref.getString("Activity Level", "Moderate");
             weather = sharedPref.getString("weather", "mild");
+            age = sharedPref.getInt("age", 0);
+            saveEmailToPreferences(email);
+
 
             water_goal = weight * 35.0;
 
@@ -111,6 +114,34 @@ public class SignUpPage extends AppCompatActivity {
                 water_goal += 500;
             } else if ("mild".equals(weather)) {
                 water_goal += 250;
+            }
+
+            if (age > 55){
+                water_goal *= 0.90;
+            } else if (age < 18) {
+                water_goal*=1.10;
+            }
+
+            if(weight <= 0){
+                water_goal = 2000;
+            }
+
+            if ("Male".equalsIgnoreCase(gender) || "M".equalsIgnoreCase(gender)) {
+                water_goal *= 1.10;
+
+                switch (activity_level.toLowerCase()) {
+                    case "high":
+                    case "very active":
+                        water_goal *= 1.30;
+                        break;
+                    case "moderate":
+                        water_goal *= 1.15;
+                        break;
+                    case "low":
+                    case "sedentary":
+                        water_goal *= 0.95;
+                        break;
+                }
             }
 
             // Add user to database
@@ -138,6 +169,12 @@ public class SignUpPage extends AppCompatActivity {
         });
     }
 
+    private void saveEmailToPreferences(String email) {
+        SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("email", email);
+        editor.apply();
+    }
     public void displayMessage(String title, String message) {
         builder.setCancelable(true);
         builder.setTitle(title);

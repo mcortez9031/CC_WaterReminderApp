@@ -48,7 +48,7 @@ public class UserLogIn extends AppCompatActivity {
                 editor.putBoolean("isLoggedIn", true);
                 editor.putString("userEmail", etEmailInput.getText().toString().trim());
                 editor.apply();
-                Intent intent = new Intent(UserLogIn.this, MainActivity.class);
+                Intent intent = new Intent(UserLogIn.this, Dashboard.class);
                 startActivity(intent);
                 finish();
             }
