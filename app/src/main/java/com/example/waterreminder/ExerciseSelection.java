@@ -19,7 +19,7 @@ public class ExerciseSelection extends AppCompatActivity {
     Button next;
     ImageView back;
     CardView rarely, light, moderate, active;
-    String activity_level;
+    String activity_level = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,5 +77,19 @@ public class ExerciseSelection extends AppCompatActivity {
             Intent intent = new Intent(ExerciseSelection.this, WeightSelection.class);
             startActivity(intent);
         });
+    }
+    public void unselectItem(String activity_level){
+        if(activity_level == "rarely"){
+            rarely.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        }
+        if(activity_level == "light"){
+            light.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        }
+        if(activity_level == "moderate"){
+            moderate.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        }
+        if(activity_level == "active"){
+            active.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        }
     }
 }

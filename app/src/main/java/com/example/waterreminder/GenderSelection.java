@@ -19,7 +19,7 @@ public class GenderSelection extends AppCompatActivity {
 CardView male, female;
 Button next;
 ImageView back;
-String gender;
+String gender = "";
 AlertDialog.Builder builder;
 
     @Override
@@ -34,6 +34,8 @@ AlertDialog.Builder builder;
         back = findViewById(R.id.btn_back);
         builder = new AlertDialog.Builder(this);
 
+        male.setOnClickListener(v -> selectGender(male, female, "male"));
+        female.setOnClickListener(v -> selectGender(female, male, "female"));
         next.setOnClickListener(v -> {
             SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
@@ -47,21 +49,18 @@ AlertDialog.Builder builder;
             startActivity(intent);
         });
 
-        male.setOnClickListener(v -> {
-            male.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
-            gender = "male";
-        });
-
-        female.setOnClickListener(v -> {
-            female.setCardBackgroundColor(Color.parseColor("#FFF17CF1"));
-            gender = "female";
-        });
-
         back.setOnClickListener(v -> {
             Intent intent = new Intent(GenderSelection.this, UserLogIn.class);
             startActivity(intent);
         });
     }
+
+    private void selectGender(CardView selected, CardView other, String selectedGender) {
+        selected.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
+        other.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        gender = selectedGender;
+    }
+
     public void displayMessage(String title, String message){
         builder.setCancelable(true);
         builder.setTitle(title);
