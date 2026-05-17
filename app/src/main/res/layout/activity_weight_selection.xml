@@ -4,9 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#C0D2E4"
     android:id="@+id/WeightSelection"
     tools:context=".WeightSelection">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/bgwater"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="290dp" />
 
     <!-- Back Button -->
     <ImageButton
@@ -104,7 +112,7 @@
             android:layout_height="wrap_content"
             android:text="0"
             android:textSize="96sp"
-            android:textColor="#03A9F4"
+            android:textColor="#101010"
             android:textStyle="bold"
             android:letterSpacing="-0.04"
             app:layout_constraintTop_toTopOf="parent"
@@ -116,7 +124,8 @@
             android:layout_height="wrap_content"
             android:text="Kilograms"
             android:textSize="19sp"
-            android:textColor="#64748B"
+            android:textColor="#303132"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/tv_weight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -129,12 +138,12 @@
             android:layout_height="wrap_content"
             android:valueFrom="0"
             android:valueTo="230"
-            android:value="0"
+            android:value="10"
             android:stepSize="1"
             app:trackHeight="12dp"
             app:thumbRadius="16dp"
             app:trackColorInactive="#E2E8F0"
-            app:trackColorActive="#03A9F4"
+            app:trackColorActive="#0875A6"
             app:thumbColor="#64B5F4"
             app:haloColor="#93C5FD"
             app:labelBehavior="gone"

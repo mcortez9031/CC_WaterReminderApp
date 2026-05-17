@@ -3,7 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#0A84FF">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/glass"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="200dp" />
 
     <!-- Background Wave -->
     <View
@@ -35,7 +44,8 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp">
+        android:layout_marginTop="32dp"
+        >
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_ml"
@@ -67,12 +77,12 @@
         android:layout_height="wrap_content"
         android:text="46.6"
         android:textSize="96sp"
-        android:textColor="#FFFFFF"
+        android:textColor="#514D4D"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/unit_group"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="203dp" />
 
     <TextView
         android:id="@+id/tv_unit"
@@ -90,11 +100,11 @@
     <!-- Adjust Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_adjust"
-        android:layout_width="180dp"
+        android:layout_width="175dp"
         android:layout_height="54dp"
         android:text="Adjust"
         android:textSize="17sp"
-        app:cornerRadius="30dp"
+        app:cornerRadius="40dp"
         app:backgroundTint="#FFFFFF"
         android:textColor="#0A84FF"
         app:layout_constraintTop_toBottomOf="@id/tv_goal"
@@ -111,10 +121,10 @@
         app:cardElevation="8dp"
         app:cardBackgroundColor="#FFFFFF"
         android:layout_marginHorizontal="32dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_adjust"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="52dp">
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -156,6 +166,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="48dp" />
+        android:layout_marginBottom="25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

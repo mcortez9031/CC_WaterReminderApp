@@ -3,7 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8FAFC">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#C0D2E4">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/bgwater"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="290dp" />
 
     <!-- Top Bar -->
     <ImageView
@@ -213,6 +222,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="36dp" />
+        android:layout_marginBottom="15dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
