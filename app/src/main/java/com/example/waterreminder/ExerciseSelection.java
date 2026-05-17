@@ -38,7 +38,7 @@ public class ExerciseSelection extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("Activity Level", activity_level);
             editor.apply();
-            Intent intent = new Intent(ExerciseSelection.this, WeightSelection.class);
+            Intent intent = new Intent(ExerciseSelection.this, WeatherSelection.class);
             startActivity(intent);
         });
 
@@ -48,7 +48,7 @@ public class ExerciseSelection extends AppCompatActivity {
         });
 
         light.setOnClickListener(v -> {
-            light.setCardBackgroundColor(Color.parseColor("FF479FF6"));
+            light.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
             activity_level = "light";
         });
         moderate.setOnClickListener(v -> {
@@ -57,7 +57,7 @@ public class ExerciseSelection extends AppCompatActivity {
         });
 
         active.setOnClickListener(v -> {
-            active.setCardBackgroundColor(Color.parseColor("FF479FF6"));
+            active.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
             activity_level = "active";
         });
 
@@ -65,5 +65,19 @@ public class ExerciseSelection extends AppCompatActivity {
             Intent intent = new Intent(ExerciseSelection.this, WeightSelection.class);
             startActivity(intent);
         });
+    }
+    public void unselectItem(String activity_level){
+        if(activity_level == "rarely"){
+            rarely.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        }
+        if(activity_level == "light"){
+            light.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        }
+        if(activity_level == "moderate"){
+            moderate.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        }
+        if(activity_level == "active"){
+            active.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
+        }
     }
 }

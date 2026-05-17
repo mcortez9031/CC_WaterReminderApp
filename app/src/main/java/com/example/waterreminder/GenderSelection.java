@@ -49,11 +49,13 @@ AlertDialog.Builder builder;
 
         male.setOnClickListener(v -> {
             male.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
+            female.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
             gender = "male";
         });
 
         female.setOnClickListener(v -> {
-            female.setCardBackgroundColor(Color.parseColor("FFF17CF1"));
+            female.setCardBackgroundColor(Color.parseColor("#FFF17CF1"));
+            male.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
             gender = "female";
         });
 
