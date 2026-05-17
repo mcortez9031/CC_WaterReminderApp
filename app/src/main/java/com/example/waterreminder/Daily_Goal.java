@@ -1,5 +1,6 @@
 package com.example.waterreminder;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -13,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Daily_Goal extends AppCompatActivity {
     Button start;
-    TextView water_goal;
+    TextView goal;
     double waterGoal;
 
     @Override
@@ -23,13 +24,15 @@ public class Daily_Goal extends AppCompatActivity {
         setContentView(R.layout.activity_daily_goal);
 
         start = findViewById(R.id.btn_start);
-        water_goal = findViewById(R.id.tv_goal);
+        goal = findViewById(R.id.tv_goal);
         start.setOnClickListener(v -> {
+            Intent intent = new Intent(Daily_Goal.this, Dashboard.class);
+            startActivity(intent);
 
         });
 
         waterGoal = getIntent().getDoubleExtra("water_goal", 0.0);
-        water_goal.setText(String.valueOf(waterGoal));
-
+        goal.setText(String.valueOf(waterGoal));
+        goal.setText(waterGoal + " ml");
     }
 }

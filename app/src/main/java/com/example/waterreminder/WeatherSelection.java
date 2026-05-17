@@ -18,8 +18,7 @@ public class WeatherSelection extends AppCompatActivity {
 Button next;
 CardView hot, cold, mild;
 ImageView back;
-String tempt;
-
+    String tempt = "mild"; // Default fallback selection
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +36,7 @@ String tempt;
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("Temperature", tempt);
             editor.apply();
-            Intent intent = new Intent(WeatherSelection.this, Daily_Goal.class);
+            Intent intent = new Intent(WeatherSelection.this, SignUpPage.class);
             startActivity(intent);
         });
 
@@ -64,6 +63,7 @@ String tempt;
         back.setOnClickListener(v -> {
             Intent intent = new Intent(WeatherSelection.this, ExerciseSelection.class);
             startActivity(intent);
+
         });
     }
 }
