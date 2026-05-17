@@ -30,8 +30,8 @@ public class ExerciseSelection extends AppCompatActivity {
         light = findViewById(R.id.optLight);
         moderate=findViewById(R.id.optModerate);
         active = findViewById(R.id.optActive);
-        back = findViewById(R.id.btn_back);
-        next = findViewById(R.id.btn_next);
+        back = findViewById(R.id.btnBack);
+        next = findViewById(R.id.btnNext);
 
         next.setOnClickListener(v -> {
             SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);

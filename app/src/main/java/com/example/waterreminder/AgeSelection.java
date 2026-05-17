@@ -29,15 +29,13 @@ public class AgeSelection extends AppCompatActivity {
     }
 
     private void initViews() {
-        ageSlider = findViewById(R.id.age_slider);
+        ageSlider = findViewById(R.id.ageSlider);
         btnContinue = findViewById(R.id.btn_next);
     }
 
     private void setupAgeSlider() {
-        // Set initial age display
         updateAgeDisplay((int) ageSlider.getValue());
 
-        // Slider value change listener
         ageSlider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(Slider slider, float value, boolean fromUser) {
@@ -47,17 +45,14 @@ public class AgeSelection extends AppCompatActivity {
     }
 
     private void updateAgeDisplay(int age) {
-        // Find the TextView and update it
-        if (findViewById(R.id.tv_age) != null) {
-            ((android.widget.TextView) findViewById(R.id.tv_age)).setText(String.valueOf(age));
+        if (findViewById(R.id.tvAge) != null) {
+            ((android.widget.TextView) findViewById(R.id.tvAge)).setText(String.valueOf(age));
         }
     }
 
     private void setupButtons() {
-        // Back Button
         findViewById(R.id.btn_back).setOnClickListener(v -> onBackPressed());
 
-        // Continue Button
         btnContinue.setOnClickListener(v -> {
             int selectedAge = (int) ageSlider.getValue();
 
@@ -67,11 +62,8 @@ public class AgeSelection extends AppCompatActivity {
                     "Age selected: " + selectedAge + " years old",
                     Toast.LENGTH_SHORT).show();
 
-            // TODO: Navigate to next screen
-            // startActivity(new Intent(AgeSelection.this, NextActivity.class));
             Intent intent = new Intent(AgeSelection.this, WeightSelection.class);
             startActivity(intent);
-            // finish();
         });
     }
 

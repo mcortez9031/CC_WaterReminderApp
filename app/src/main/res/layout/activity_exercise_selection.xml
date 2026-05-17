@@ -5,9 +5,8 @@
     android:layout_height="match_parent"
     android:background="#F8FAFC">
 
-    <!-- Top Bar -->
     <ImageView
-        android:id="@+id/btn_back"
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/baseline_arrow_back_ios_24"
@@ -16,10 +15,10 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_step"
+        android:id="@+id/tvPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4 / 5"
+        android:text="4 of 5"
         android:textSize="16sp"
         android:textColor="#64748B"
         android:textStyle="bold"
@@ -30,7 +29,7 @@
 
     <!-- Title -->
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="What's your weekly activity level?"
@@ -39,13 +38,13 @@
         android:textStyle="bold"
         android:gravity="center"
         android:lineSpacingExtra="6dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_back"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"
         android:layout_marginHorizontal="32dp" />
 
-    <!-- Options Grid -->
+    <!-- Options using Grid -->
     <GridLayout
         android:id="@+id/exercise_grid"
         android:layout_width="0dp"
@@ -54,13 +53,13 @@
         android:rowCount="2"
         android:alignmentMode="alignMargins"
         android:useDefaultMargins="true"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="48dp"
         android:layout_marginHorizontal="24dp">
 
-        <!-- Option 1 -->
+        <!-- OPT 1: Rare -->
         <androidx.cardview.widget.CardView
             android:id="@+id/optRarely"
             android:layout_width="0dp"
@@ -103,7 +102,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Option 2 -->
+        <!-- OPT 2: Light -->
         <androidx.cardview.widget.CardView
             android:id="@+id/optLight"
             android:layout_width="0dp"
@@ -146,7 +145,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Option 3 - Selected -->
+        <!-- OPT 3: Moderate -->
         <androidx.cardview.widget.CardView
             android:id="@+id/optModerate"
             android:layout_width="0dp"
@@ -189,7 +188,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Option 4 -->
+        <!-- OPT 4: Active -->
         <androidx.cardview.widget.CardView
             android:id="@+id/optActive"
             android:layout_width="0dp"
@@ -234,9 +233,9 @@
 
     </GridLayout>
 
-    <!-- Next Button -->
+    <!-- Next -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next"
+        android:id="@+id/btnNext"
         android:layout_width="0dp"
         android:layout_height="58dp"
         android:text="Continue"

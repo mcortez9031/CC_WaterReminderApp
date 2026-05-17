@@ -9,7 +9,7 @@ import android.database.Cursor;
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    //columns of etc
+    //columns of User info
     private static final String COLUMN_ID = "userID";
     private static final String TABLE_NAME = "user_info";
     private static final String COLUMN_USERNAME = "username";
@@ -32,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_PASSWORD + " TEXT, "
                 + COLUMN_EMAIL + " TEXT UNIQUE, "
                 + COLUMN_GENDER + " TEXT, "
+                + COLUMN_AGE + "INTEGER," // <===============================
                 + COLUMN_WEIGHT + " REAL, "
                 + COLUMN_ACTIVITY_LEVEL + " TEXT, "
                 + COLUMN_WATER_GOAL + " INTEGER, "
