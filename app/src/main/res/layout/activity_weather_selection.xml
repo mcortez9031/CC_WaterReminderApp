@@ -79,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="5"
                 android:layout_height="48dp"
-                android:text="The hotter your climate, the more water your body needs daily"
+                android:text="The hotter the climate, the more water the body needs daily"
                 android:textSize="15sp"
                 android:textColor="#0369A1"
                 android:lineSpacingExtra="4dp" />

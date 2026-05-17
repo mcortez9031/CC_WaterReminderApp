@@ -20,6 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_AGE = "user_age";
     private static final String COLUMN_ACTIVITY_LEVEL = "user_activity_level";
     private static final String COLUMN_WATER_GOAL="user_daily_goal";
+    private static final String COLUMN_WEATHER = "current_weather";
     private static final String COLUMN_IS_DELETED="deleted";
     private static final String DATABASE_NAME = "WaterIntake.db";
     private static final int DATABASE_VERSION = 1;
@@ -36,6 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_WEIGHT + " REAL, "
                 + COLUMN_ACTIVITY_LEVEL + " TEXT, "
                 + COLUMN_WATER_GOAL + " INTEGER, "
+                + COLUMN_WEATHER + "TEXT,"
                 + COLUMN_IS_DELETED + " INTEGER DEFAULT 0)";
         db.execSQL(CREATE_USER_TABLE);
     }
@@ -49,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addUser(String user, String pass, String email,
-                           String gender, double weight, String activity_level, int water_goal) {
+                           String gender, int weight, String activity_level, double water_goal, String weather) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -58,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_EMAIL, email);
         cv.put(COLUMN_GENDER, gender);
         cv.put(COLUMN_WEIGHT, weight);
+        cv.put(COLUMN_WEATHER, weather);
         cv.put(COLUMN_IS_DELETED, 0);
         cv.put(COLUMN_ACTIVITY_LEVEL, activity_level);
         cv.put(COLUMN_WATER_GOAL, water_goal);

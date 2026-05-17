@@ -3,6 +3,7 @@ package com.example.waterreminder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.button.MaterialButton;
@@ -17,6 +18,7 @@ public class AgeSelection extends AppCompatActivity {
 
     private Slider ageSlider;
     private MaterialButton btnContinue;
+    private ImageButton btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class AgeSelection extends AppCompatActivity {
     private void initViews() {
         ageSlider = findViewById(R.id.ageSlider);
         btnContinue = findViewById(R.id.btn_next);
+        btnBack = findViewById(R.id.btnBack);
     }
 
     private void setupAgeSlider() {
@@ -51,7 +54,7 @@ public class AgeSelection extends AppCompatActivity {
     }
 
     private void setupButtons() {
-        findViewById(R.id.btn_back).setOnClickListener(v -> onBackPressed());
+        findViewById(R.id.btnBack).setOnClickListener(v -> onBackPressed());
 
         btnContinue.setOnClickListener(v -> {
             int selectedAge = (int) ageSlider.getValue();

@@ -3,6 +3,7 @@ package com.example.waterreminder;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +12,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Daily_Goal extends AppCompatActivity {
-    Button adjust, start;
+    Button start;
+    TextView water_goal;
+    double waterGoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,17 +22,15 @@ public class Daily_Goal extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_daily_goal);
 
-        adjust = findViewById(R.id.btn_adjust);
         start = findViewById(R.id.btn_start);
-
-        adjust.setOnClickListener(v -> {
-
-        });
+        water_goal = findViewById(R.id.tv_goal);
 
         start.setOnClickListener(v -> {
 
         });
 
+        waterGoal = getIntent().getDoubleExtra("water_goal", 0.0);
+        water_goal.setText(String.valueOf(waterGoal));
 
-        }
+    }
 }

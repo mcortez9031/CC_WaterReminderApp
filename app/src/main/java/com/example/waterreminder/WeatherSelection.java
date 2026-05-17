@@ -42,16 +42,16 @@ String tempt;
         });
 
         hot.setOnClickListener(v -> {
-            hot.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
+            hot.setCardBackgroundColor(Color.parseColor("#FFFFBA54"));
             tempt = "hot";
         });
 
         cold.setOnClickListener(v -> {
-            cold.setCardBackgroundColor(Color.parseColor("FF479FF6"));
+            cold.setCardBackgroundColor(Color.parseColor("FF007EE3"));
             tempt = "cold";
         });
         mild.setOnClickListener(v -> {
-            mild.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
+            mild.setCardBackgroundColor(Color.parseColor("#FFC5E6EA"));
             tempt = "mild";
         });
 

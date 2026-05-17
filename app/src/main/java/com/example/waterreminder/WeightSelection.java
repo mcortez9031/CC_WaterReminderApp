@@ -33,7 +33,6 @@ public class WeightSelection extends AppCompatActivity {
         }
 
         private void setupAgeSlider() {
-            // Set initial weight display
             updateWeightDisplay((int) weightSlider.getValue());
 
             // Slider value change listener

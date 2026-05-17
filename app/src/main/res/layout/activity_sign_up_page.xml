@@ -155,8 +155,7 @@
                 android:textSize="14sp"
                 android:layout_marginStart="4dp"
                 android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground" />
+                android:focusable="true" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

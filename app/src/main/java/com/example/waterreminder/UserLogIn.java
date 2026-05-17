@@ -14,34 +14,39 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.textfield.TextInputLayout;
+
 public class UserLogIn extends AppCompatActivity {
     Button signIn;
-    EditText email, password;
+    EditText etEmailInput, etPasswordInput;   // Actual EditTexts
     TextView signUp;
 
-    AlertDialog.Builder builder, successMessage;
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user_log_in);
 
-        signIn=findViewById(R.id.btn_login);
-        email=findViewById(R.id.til_email);
-        password=findViewById(R.id.til_password);
-        signUp=findViewById(R.id.tv_sign_up);
+        signIn = findViewById(R.id.btnLogin);
+        signUp = findViewById(R.id.tvSignUp);
+        TextInputLayout emailLayout = findViewById(R.id.etEmail);
+        TextInputLayout passwordLayout = findViewById(R.id.etPassword);
+        etEmailInput = emailLayout.getEditText();
+        etPasswordInput = passwordLayout.getEditText();
+        builder = new AlertDialog.Builder(this);
 
         signIn.setOnClickListener(v ->{
             DatabaseHelper databaseHelper = new DatabaseHelper(UserLogIn.this);
-            boolean userFound = databaseHelper.searchUser(email.getText().toString().trim(), password.getText().toString().trim());
+            boolean userFound = databaseHelper.searchUser(etEmailInput.getText().toString().trim(), etPasswordInput.getText().toString().trim());
             if (!userFound){
                 displayMessage("LogIn Error!", "Incorrect username or password");
             }else {
-                SharedPreferences sharedPref = getSharedPreferences("HeronHealthPrefs", MODE_PRIVATE);
+                SharedPreferences sharedPref = getSharedPreferences("AquaFill", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
 
                 editor.putBoolean("isLoggedIn", true);
-                editor.putString("userEmail", email.getText().toString().trim());
+                editor.putString("userEmail", etEmailInput.getText().toString().trim());
                 editor.apply();
                 Intent intent = new Intent(UserLogIn.this, MainActivity.class);
                 startActivity(intent);
@@ -50,7 +55,7 @@ public class UserLogIn extends AppCompatActivity {
         });
 
         signUp.setOnClickListener(v ->{
-            Intent intent = new Intent(UserLogIn.this, SignUpPage.class);
+            Intent intent = new Intent(UserLogIn.this, GenderSelection.class);
             startActivity(intent);
         });
     }

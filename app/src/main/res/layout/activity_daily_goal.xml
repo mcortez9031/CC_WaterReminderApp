@@ -84,35 +84,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="203dp" />
 
+    <!-- Info Card -->
     <TextView
         android:id="@+id/tv_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="oz"
-        android:textSize="36sp"
-        android:textColor="#BAE6FD"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/tv_goal"
-        app:layout_constraintBottom_toBottomOf="@id/tv_goal"
         android:layout_marginStart="8dp"
-        android:layout_marginBottom="18dp" />
+        android:layout_marginBottom="18dp"
+        android:text="mL"
+        android:textColor="#BAE6FD"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/tv_goal"
+        app:layout_constraintStart_toEndOf="@id/tv_goal" />
 
-    <!-- Adjust Button -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_adjust"
-        android:layout_width="175dp"
-        android:layout_height="54dp"
-        android:text="Adjust"
-        android:textSize="17sp"
-        app:cornerRadius="40dp"
-        app:backgroundTint="#FFFFFF"
-        android:textColor="#0A84FF"
-        app:layout_constraintTop_toBottomOf="@id/tv_goal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp" />
-
-    <!-- Info Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/info_card"
         android:layout_width="0dp"
@@ -166,6 +151,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="25" />
+        android:layout_marginBottom="25dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

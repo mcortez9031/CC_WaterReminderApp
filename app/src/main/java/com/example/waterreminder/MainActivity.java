@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         next=findViewById(R.id.btn_next);
         next.setOnClickListener(v ->{
             Intent intent= new Intent(MainActivity.this, UserLogIn.class);
+            startActivity(intent);
         });
     }
 }

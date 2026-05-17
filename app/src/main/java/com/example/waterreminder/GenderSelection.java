@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
@@ -19,6 +20,7 @@ CardView male, female;
 Button next;
 ImageView back;
 String gender;
+AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +32,17 @@ String gender;
         female = findViewById(R.id.card_female);
         next = findViewById(R.id.btn_next);
         back = findViewById(R.id.btn_back);
+        builder = new AlertDialog.Builder(this);
 
         next.setOnClickListener(v -> {
             SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("gender", gender);
             editor.apply();
+            if (gender.isEmpty()){
+                displayMessage("Missing", "Please select a Gender.");
+                return;
+            }
             Intent intent = new Intent(GenderSelection.this, AgeSelection.class);
             startActivity(intent);
         });
@@ -54,5 +61,11 @@ String gender;
             Intent intent = new Intent(GenderSelection.this, UserLogIn.class);
             startActivity(intent);
         });
+    }
+    public void displayMessage(String title, String message){
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }

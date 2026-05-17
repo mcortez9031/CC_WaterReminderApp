@@ -1,71 +1,143 @@
 package com.example.waterreminder;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.util.Patterns;
-import androidx.appcompat.app.AlertDialog;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 public class SignUpPage extends AppCompatActivity {
-EditText etUsername, etEmail, etPassword, etConfirmPassword;
-Button btnSignUp;
-AlertDialog.Builder builder, successMessage;
+
+    // TextInputLayouts
+    private TextInputLayout tilUsername, tilEmail, tilPassword, tilConfirmPassword;
+
+    // Actual EditTexts (where we get text from)
+    private EditText etUsernameInput, etEmailInput, etPasswordInput, etConfirmPasswordInput;
+
+    Button btnSignUp;
+
+    AlertDialog.Builder builder;
+    AlertDialog.Builder successMessage;   // renamed for clarity
+
+    String gender, activity_level, weather;
+    int weight;
+    double water_goal;
+
+    DatabaseHelper databaseHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up_page);
 
-        etUsername  =   findViewById(R.id.tilFullName);
-        etEmail =   findViewById(R.id.tilEmail);
-        etPassword  =   findViewById(R.id.etPassword);
-        etConfirmPassword   = findViewById(R.id.etConfirmPassword);
+        // Initialize DatabaseHelper
+        databaseHelper = new DatabaseHelper(SignUpPage.this);
 
-        if (etUsername.getText().toString().trim().isEmpty() || etPassword.getText().toString().trim().isEmpty()
-                || etEmail.getText().toString().trim().isEmpty()|| etConfirmPassword.getText().toString().trim().isEmpty()) {
-            displayMessage("Input Error!", "Please fill all fields");
-            return;
-        }
-        String PASSWORD_PATTERN =
-                "^(?=.*[0-9])" +         // at least one digit
-                        "(?=.*[a-z])" +         // at least one lowercase letter
-                        "(?=.*[A-Z])" +         // at least one uppercase letter
-                        "(?=.*[!@#$%^&*()-+=])" + // at least one special character
-                        "(?=\\S+$)" +           // no whitespace allowed
-                        ".{8,20}$";
+        // Initialize Builders
+        builder = new AlertDialog.Builder(this);
+        successMessage = new AlertDialog.Builder(this);
 
-        if (!etPassword.getText().toString().trim().matches(PASSWORD_PATTERN)) {
-            displayMessage("Weak Password",
-                    "Password must be at least 8 characters long, including " +
-                            "uppercase, lowercase, a number, and a special character (@#$%^&+=!).");
-            return;
-        }
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail.getText().toString().trim()).matches()) {
-            displayMessage("Invalid Email", "Please enter a valid email address.");
-            return;
-        }
+        // Find TextInputLayouts
+        tilUsername = findViewById(R.id.tilFullName);
+        tilEmail = findViewById(R.id.etEmail);
+        tilPassword = findViewById(R.id.etPassword);
+        tilConfirmPassword = findViewById(R.id.etConfirmPassword);
 
-        //add user to database
-        boolean success = DatabaseHelper.addUser(etUsername, etPassword, etEmail, etGender, etWeight, activity_level, water_goal);
+        btnSignUp = findViewById(R.id.btnSignUp);
 
-        if (success) {
-            successMessage.setCancelable(false);
-            successMessage.setTitle("Success");
-            successMessage.setMessage("Welcome to HeronHealth!");
+        // Get the actual EditTexts inside the layouts
+        etUsernameInput = tilUsername.getEditText();
+        etEmailInput = tilEmail.getEditText();
+        etPasswordInput = tilPassword.getEditText();
+        etConfirmPasswordInput = tilConfirmPassword.getEditText();
+
+        btnSignUp.setOnClickListener(v -> {
+            if (etUsernameInput == null || etEmailInput == null ||
+                    etPasswordInput == null || etConfirmPasswordInput == null) {
+                displayMessage("Error", "Something went wrong with input fields");
+                return;
+            }
+
+            String username = etUsernameInput.getText().toString().trim();
+            String email = etEmailInput.getText().toString().trim();
+            String password = etPasswordInput.getText().toString().trim();
+            String confirmPassword = etConfirmPasswordInput.getText().toString().trim();
+
+            // Empty field check
+            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+                displayMessage("Input Error!", "Please fill all fields");
+                return;
+            }
+
+            // Password confirmation check
+            if (!password.equals(confirmPassword)) {
+                displayMessage("Password Mismatch", "Passwords do not match. Please try again.");
+                return;
+            }
+
+            // Password strength
+            String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-+=])(?=\\S+$).{8,20}$";
+            if (!password.matches(PASSWORD_PATTERN)) {
+                displayMessage("Weak Password",
+                        "Password must be 8-20 characters long with uppercase, lowercase, number, and special character.");
+                return;
+            }
+
+            // Email validation
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                displayMessage("Invalid Email", "Please enter a valid email address.");
+                return;
+            }
+
+            // Load user profile data
+            SharedPreferences sharedPref = getSharedPreferences("user_profile", Context.MODE_PRIVATE);
+            gender = sharedPref.getString("gender", "Not Specified");
+            weight = sharedPref.getInt("weight", 60);
+            activity_level = sharedPref.getString("activity_level", "Moderate");
+            weather = sharedPref.getString("weather", "mild");
+
+            water_goal = weight * 35.0;
+
+            if ("hot".equals(weather)) {
+                water_goal += 500;
+            } else if ("mild".equals(weather)) {
+                water_goal += 250;
+            }
+
+            // Add user to database
+            boolean success = databaseHelper.addUser(username, password, email,
+                    gender, weight, activity_level, water_goal, weather);
+
+            if (success) {
+                successMessage.setCancelable(false);
+                successMessage.setTitle("Success");
+                successMessage.setMessage("Welcome to AquaFill!");
+                successMessage.setPositiveButton("OK", (dialog, which) -> {
+                    Intent intent = new Intent(SignUpPage.this, Daily_Goal.class);
+                    intent.putExtra("water_goal", water_goal);
+                    startActivity(intent);
+                    finish();
+                });
+                successMessage.show();
+            } else {
+                displayMessage("Registration Failed", "Username or email may already exist.");
+            }
+        });
     }
 
-    }
-
-    public void displayMessage(String title, String message){
+    public void displayMessage(String title, String message) {
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
+        builder.setPositiveButton("OK", null);
         builder.show();
     }
 }
