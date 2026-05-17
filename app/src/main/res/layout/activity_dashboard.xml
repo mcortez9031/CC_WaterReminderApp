@@ -1,0 +1,141 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <!--  Logo and Title  -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:text="AquaFill"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText"/>
+
+    </LinearLayout>
+
+    <!--  Progress  -->
+    <TextView
+        android:id="@+id/tvWaterIntake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:text="0 / 2000 ml"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed-light"
+        android:layout_marginBottom="16dp"
+        tools:ignore="HardcodedText"/>
+    <ProgressBar
+        android:id="@+id/progressBar" style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginTop="5dp"
+        android:max="2000"
+        android:progress="0"
+        android:progressTint="#55B1FC"
+        android:layout_marginBottom="32dp"/>
+
+    <!--  Input  -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:boxStrokeColor="#4794D3"
+        app:hintTextColor="#4794D3" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAmount"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:hint="Amount of Water (ml)"
+            android:inputType="number"
+            android:textSize="18sp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            tools:ignore="HardcodedText"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Buttons  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Add Water"
+            android:backgroundTint="#4794D3"
+            app:strokeWidth="1dp"
+            app:strokeColor="#525252"
+            tools:ignore="ButtonStyle,HardcodedText"/>
+        <Button
+            android:id="@+id/btnReminder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Set Reminder"
+            android:backgroundTint="#4794D3"
+            app:strokeWidth="1dp"
+            app:strokeColor="#525252"
+            tools:ignore="ButtonStyle,HardcodedText"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:layout_marginStart="180dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnReminder"
+        android:text="Note: Reminder is set to 2 hours interval"
+        tools:ignore="HardcodedText,SmallSp"/>
+
+    <Button
+        android:id="@+id/btnHistory"
+        android:layout_width="305dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="5dp"
+        android:layout_weight="1"
+        android:backgroundTint="#4794D3"
+        android:text="History"
+        app:strokeColor="#525252"
+        app:strokeWidth="1dp"
+        tools:ignore="ButtonStyle,HardcodedText" />
+</LinearLayout>

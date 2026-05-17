@@ -53,7 +53,7 @@ AlertDialog.Builder builder;
         });
 
         female.setOnClickListener(v -> {
-            female.setCardBackgroundColor(Color.parseColor("FFF17CF1"));
+            female.setCardBackgroundColor(Color.parseColor("#FFF17CF1"));
             gender = "female";
         });
 

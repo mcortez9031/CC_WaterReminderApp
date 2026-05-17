@@ -24,7 +24,6 @@ public class Daily_Goal extends AppCompatActivity {
 
         start = findViewById(R.id.btn_start);
         water_goal = findViewById(R.id.tv_goal);
-
         start.setOnClickListener(v -> {
 
         });

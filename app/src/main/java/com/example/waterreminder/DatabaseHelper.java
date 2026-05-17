@@ -8,6 +8,13 @@ import android.database.Cursor;
 
 import androidx.annotation.Nullable;
 
+import com.example.waterreminder.models.WaterLogInfo;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     //columns of User info
     private static final String COLUMN_ID = "userID";
@@ -24,6 +31,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_IS_DELETED="deleted";
     private static final String DATABASE_NAME = "WaterIntake.db";
     private static final int DATABASE_VERSION = 1;
+    private static final String COL_ID = "id";
+    private static final String COL_AMOUNT = "amount";
+    private static final String COL_TIMESTAMP = "timestamp";
+    private static final String NAME_TABLE = "water_log";
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -33,13 +44,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_PASSWORD + " TEXT, "
                 + COLUMN_EMAIL + " TEXT UNIQUE, "
                 + COLUMN_GENDER + " TEXT, "
-                + COLUMN_AGE + "INTEGER," // <===============================
+                + COLUMN_AGE + "INTEGER,"
                 + COLUMN_WEIGHT + " REAL, "
                 + COLUMN_ACTIVITY_LEVEL + " TEXT, "
                 + COLUMN_WATER_GOAL + " INTEGER, "
                 + COLUMN_WEATHER + "TEXT,"
                 + COLUMN_IS_DELETED + " INTEGER DEFAULT 0)";
         db.execSQL(CREATE_USER_TABLE);
+
+        String query = "CREATE TABLE " + NAME_TABLE + " ("
+                + COLUMN_EMAIL + "TEXT UNIQUE,"
+                + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_AMOUNT + " INTEGER, "
+                + COL_TIMESTAMP + " TEXT)";
+
+        db.execSQL(query);
     }
 
     @Override
@@ -97,6 +116,77 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return count > 0;
     }
+    public void addLog(int amount) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(COL_AMOUNT, amount);
+
+        String timestamp = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss",
+                Locale.getDefault()
+        ).format(new Date());
+
+        values.put(COL_TIMESTAMP, timestamp);
+
+        db.insert(TABLE_NAME, null, values);
+
+        db.close();
+    }
+
+    public int getDailyTotal() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        int total = 0;
+
+        String today = new SimpleDateFormat(
+                "yyyy-MM-dd",
+                Locale.getDefault()
+        ).format(new Date());
+
+        String query = "SELECT SUM(" + COL_AMOUNT + ") FROM "
+                + TABLE_NAME
+                + " WHERE date(" + COL_TIMESTAMP + ") = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{today});
+
+        if (cursor.moveToFirst()) {
+
+            total = cursor.getInt(0);
+        }
+
+        cursor.close();
+
+        db.close();
+
+        return total;
+    }
+
+    public ArrayList<WaterLogInfo> getHistory(String email){
+        ArrayList<WaterLogInfo> historyList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT " + COL_AMOUNT + ", " + COL_TIMESTAMP + " FROM "
+                + NAME_TABLE +  " WHERE " + COLUMN_EMAIL + "= ?"
+                + " ORDER BY " + COL_TIMESTAMP + " DESC";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
+
+        if (cursor != null){
+            while(cursor.moveToNext()){
+                WaterLogInfo waterLogInfo= new WaterLogInfo(cursor.getInt(2),
+                        cursor.getString(3));
+
+                historyList.add(waterLogInfo);
+            }
+            cursor.close();
+        }
+        db.close();
+        return historyList;
+    }
+
+
     public boolean softDeleteUser(String email){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();

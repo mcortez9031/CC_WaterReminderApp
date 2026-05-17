@@ -38,26 +38,38 @@ public class ExerciseSelection extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("Activity Level", activity_level);
             editor.apply();
-            Intent intent = new Intent(ExerciseSelection.this, WeightSelection.class);
+            Intent intent = new Intent(ExerciseSelection.this, WeatherSelection.class);
             startActivity(intent);
         });
 
         rarely.setOnClickListener(v -> {
             rarely.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
+            light.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            moderate.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            active.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             activity_level = "rarely";
         });
 
         light.setOnClickListener(v -> {
-            light.setCardBackgroundColor(Color.parseColor("FF479FF6"));
+            light.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
+            rarely.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            moderate.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            active.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             activity_level = "light";
         });
         moderate.setOnClickListener(v -> {
             moderate.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
+            rarely.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            light.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            active.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             activity_level = "moderate";
         });
 
         active.setOnClickListener(v -> {
-            active.setCardBackgroundColor(Color.parseColor("FF479FF6"));
+            active.setCardBackgroundColor(Color.parseColor("#FF479FF6"));
+            rarely.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            light.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            moderate.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             activity_level = "active";
         });
 

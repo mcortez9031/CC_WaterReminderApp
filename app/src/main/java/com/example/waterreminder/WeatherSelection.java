@@ -43,15 +43,21 @@ String tempt;
 
         hot.setOnClickListener(v -> {
             hot.setCardBackgroundColor(Color.parseColor("#FFFFBA54"));
+            cold.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            mild.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             tempt = "hot";
         });
 
         cold.setOnClickListener(v -> {
-            cold.setCardBackgroundColor(Color.parseColor("FF007EE3"));
+            cold.setCardBackgroundColor(Color.parseColor("#FF007EE3"));
+            hot.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            mild.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             tempt = "cold";
         });
         mild.setOnClickListener(v -> {
             mild.setCardBackgroundColor(Color.parseColor("#FFC5E6EA"));
+            cold.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
+            hot.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             tempt = "mild";
         });
 
