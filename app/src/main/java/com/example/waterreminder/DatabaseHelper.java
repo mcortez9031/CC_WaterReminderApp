@@ -69,26 +69,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public boolean addUser(String user, String pass, String email,
-                           String gender, int weight, String activity_level, double water_goal, String weather) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
+    public boolean addUser(String username, String password, String email,
+                           String gender, int weight, String activity_level,
+                           double water_goal, String weather) {
 
-        cv.put(COLUMN_USERNAME, user);
-        cv.put(COLUMN_PASSWORD, pass);
-        cv.put(COLUMN_EMAIL, email);
-        cv.put(COLUMN_GENDER, gender);
-        cv.put(COLUMN_WEIGHT, weight);
-        cv.put(COLUMN_WEATHER, weather);
-        cv.put(COLUMN_IS_DELETED, 0);
-        cv.put(COLUMN_ACTIVITY_LEVEL, activity_level);
-        cv.put(COLUMN_WATER_GOAL, water_goal);
+        // Optional: Hash the password (recommended)
+        // String hashedPassword = hashPassword(password);
 
-        long result = db.insert(TABLE_NAME, null, cv);
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+            ContentValues cv = new ContentValues();
 
-        db.close();
+            cv.put(COLUMN_USERNAME, username);
+            cv.put(COLUMN_PASSWORD, password);        // ← Change to hashedPassword later
+            cv.put(COLUMN_EMAIL, email);
+            cv.put(COLUMN_GENDER, gender);
+            cv.put(COLUMN_WEIGHT, weight);
+            cv.put(COLUMN_ACTIVITY_LEVEL, activity_level);
+            cv.put(COLUMN_WATER_GOAL, water_goal);
+            cv.put(COLUMN_WEATHER, weather);
+            cv.put(COLUMN_IS_DELETED, 0);
 
-        return result != -1;
+            // Optional: Check if user already exists
+            if (isUserExists(db, username, email)) {
+                return false; // User already exists
+            }
+
+            long result = db.insert(TABLE_NAME, null, cv);
+            return result != -1;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
+    // Helper method to check existing user
+    private boolean isUserExists(SQLiteDatabase db, String username, String email) {
+        Cursor cursor = null;
+        try {
+            String query = "SELECT 1 FROM " + TABLE_NAME +
+                    " WHERE " + COLUMN_USERNAME + "=? OR " + COLUMN_EMAIL + "=?";
+            cursor = db.rawQuery(query, new String[]{username, email});
+            return cursor.getCount() > 0;
+        } finally {
+            if (cursor != null) cursor.close();
+        }
     }
 
     boolean searchUser(String email, String password){

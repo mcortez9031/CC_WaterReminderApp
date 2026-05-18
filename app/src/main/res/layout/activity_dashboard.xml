@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -42,13 +43,15 @@
         android:fontFamily="sans-serif-condensed-light"
         android:layout_marginBottom="16dp"
         tools:ignore="HardcodedText"/>
+
     <ProgressBar
-        android:id="@+id/progressBar" style="?android:attr/progressBarStyleHorizontal"
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:layout_marginTop="5dp"
         android:max="2000"
-        android:progress="0"
+        android:progress="800"
         android:progressTint="#55B1FC"
         android:layout_marginBottom="32dp"/>
 
@@ -63,7 +66,8 @@
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusTopStart="16dp"
         app:boxStrokeColor="#4794D3"
-        app:hintTextColor="#4794D3" style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:hintTextColor="#4794D3"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etAmount"
@@ -77,12 +81,13 @@
             tools:ignore="HardcodedText"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Buttons  -->
+    <!-- Buttons Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:weightSum="2"
+        android:layout_marginBottom="8dp">
 
         <Button
             android:id="@+id/btnAdd"
@@ -97,6 +102,7 @@
             app:strokeWidth="1dp"
             app:strokeColor="#525252"
             tools:ignore="ButtonStyle,HardcodedText"/>
+
         <Button
             android:id="@+id/btnReminder"
             android:layout_width="0dp"
@@ -112,30 +118,30 @@
             tools:ignore="ButtonStyle,HardcodedText"/>
     </LinearLayout>
 
+    <!-- Note Text -->
     <TextView
         android:id="@+id/textView"
-        android:layout_width="180sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:layout_marginStart="180dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnReminder"
+        android:textSize="12sp"
+        android:layout_marginStart="140dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="16dp"
         android:text="Note: Reminder is set to 2 hours interval"
-        tools:ignore="HardcodedText,SmallSp"/>
+        tools:ignore="HardcodedText"/>
 
+    <!-- History Button -->
     <Button
-        android:id="@+id/btnHistory"
-        android:layout_width="305dp"
-        android:layout_height="20dp"
+        android:id="@+id/btnHisto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
-        android:layout_weight="1"
+        android:text="View History"
         android:backgroundTint="#4794D3"
-        android:text="History"
-        app:strokeColor="#525252"
+        android:layout_marginTop="15dp"
         app:strokeWidth="1dp"
-        tools:ignore="ButtonStyle,HardcodedText" />
+        app:strokeColor="#525252"
+        tools:ignore="ButtonStyle,HardcodedText"/>
+
 </LinearLayout>

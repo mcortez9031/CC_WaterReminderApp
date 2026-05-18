@@ -78,5 +78,6 @@ public class WeightSelection extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putInt("user_age", age);
             editor.apply();
+
         }
     }
