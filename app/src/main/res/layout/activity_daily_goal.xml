@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="mL"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:textColor="#1F2937"
                 android:textStyle="bold"
                 android:layout_marginStart="6dp"

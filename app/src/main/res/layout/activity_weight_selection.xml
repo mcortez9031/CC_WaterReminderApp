@@ -198,5 +198,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginBottom="65dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
