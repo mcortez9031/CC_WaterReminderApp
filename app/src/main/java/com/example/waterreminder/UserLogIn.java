@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -18,7 +19,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class UserLogIn extends AppCompatActivity {
     Button signIn;
-    EditText etEmailInput, etPasswordInput;   // Actual EditTexts
+    EditText etEmailInput, etPasswordInput;
     TextView signUp;
 
     AlertDialog.Builder builder;
@@ -36,9 +37,22 @@ public class UserLogIn extends AppCompatActivity {
         etPasswordInput = passwordLayout.getEditText();
         builder = new AlertDialog.Builder(this);
 
+        if (emailLayout == null || passwordLayout == null) {
+            Toast.makeText(this, "Layout Error: Check XML IDs", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        etEmailInput = emailLayout.getEditText();
+        etPasswordInput = passwordLayout.getEditText();
+
+        if (etEmailInput == null || etPasswordInput == null) {
+            Toast.makeText(this, "Cannot find EditText inside TextInputLayout", Toast.LENGTH_LONG).show();
+            return;
+        }
         signIn.setOnClickListener(v ->{
             DatabaseHelper databaseHelper = new DatabaseHelper(UserLogIn.this);
             boolean userFound = databaseHelper.searchUser(etEmailInput.getText().toString().trim(), etPasswordInput.getText().toString().trim());
+
             if (!userFound){
                 displayMessage("LogIn Error!", "Incorrect username or password");
             }else {
