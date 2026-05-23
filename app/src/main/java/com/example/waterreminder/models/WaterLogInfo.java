@@ -21,6 +21,5 @@ public class WaterLogInfo {
     public WaterLogInfo(int waterIntake, String dateTime){
         this.waterIntake = waterIntake;
         this.dateTime = dateTime;
-
     }
 }

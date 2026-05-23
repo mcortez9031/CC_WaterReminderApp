@@ -1,5 +1,6 @@
 package com.example.waterreminder;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,13 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Dashboard extends AppCompatActivity {
 
-    private TextView tvWaterIntake;
+    private TextView tvWaterIntake, tvDailyGoal;
     private ProgressBar progressBar;
     private EditText etAmount;
     private Button btnAdd, btnReminder, btnHisto;
     private DatabaseHelper databaseHelper;
     private String email = "";
-    private int dailyGoal = 2000;
+    private int dailyGoal = 0;
+    private int selectedHour   = 20;
+    private int selectedMinute = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class Dashboard extends AppCompatActivity {
             btnAdd = findViewById(R.id.btnAdd);
             btnReminder = findViewById(R.id.btnReminder);
             btnHisto = findViewById(R.id.btnHisto);
+            tvDailyGoal = findViewById(R.id.tvDailyGoal);
+
 
             databaseHelper = new DatabaseHelper(this);
 
@@ -53,12 +58,23 @@ public class Dashboard extends AppCompatActivity {
             createNotificationChannel();
             updateUI();
 
-            // Button listeners
             btnAdd.setOnClickListener(v -> addWater());
 
             btnReminder.setOnClickListener(v -> {
-                setReminder();
-                Toast.makeText(this, "Reminder set (2 minutes for testing)", Toast.LENGTH_SHORT).show();
+                TimePickerDialog dialog = new TimePickerDialog(
+                        this,
+                        android.R.style.Theme_DeviceDefault_Dialog_Alert,
+                        (view, hourOfDay, minute) -> {
+                            selectedHour   = hourOfDay;
+                            selectedMinute = minute;
+
+                        },
+                        selectedHour,
+                        selectedMinute,
+                        false
+                );
+                dialog.setTitle("SELECT TIME");
+                dialog.show();
             });
 
             btnHisto.setOnClickListener(v ->
@@ -94,14 +110,17 @@ public class Dashboard extends AppCompatActivity {
         if (tvWaterIntake == null || progressBar == null) return;
 
         int total = databaseHelper.getDailyTotal(email);
-        tvWaterIntake.setText(total + " / " + dailyGoal + " ml");
+        tvWaterIntake.setText(total);
         progressBar.setMax(dailyGoal);
         progressBar.setProgress(Math.min(total, dailyGoal));
+        tvDailyGoal.setText(dailyGoal);
     }
 
     private void setReminder() {
+
     }
 
     private void createNotificationChannel() {
+
     }
 }
