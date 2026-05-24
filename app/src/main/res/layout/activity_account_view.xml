@@ -5,24 +5,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F9FA"
+    android:background="@drawable/bg_aquafill"
     tools:context=".AccountView"
     android:id="@+id/main">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F1F3F5"
-        app:title="Notification/Status Bar"
-        app:titleTextColor="#555555"
-        app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        style="@style/Widget.MaterialComponents.Toolbar.Surface" />
+        android:background="@drawable/bg_aquafill"
+        app:elevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="0dp"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="411dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="40dp"
+                android:paddingHorizontal="24dp">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="3dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/pic" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="AquaFill"
+                    android:textColor="#1E3A5F"
+                    android:textSize="28sp"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    android:letterSpacing="-0.02" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/navBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_dashboard"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="145dp"
+                    android:layout_height="48dp"
+                    android:text="Dashboard"
+                    android:textSize="14sp"
+                    app:backgroundTint="#7ED6FF"
+                    app:cornerRadius="1dp"
+                    app:icon="@drawable/drinkdash"
+                    app:iconTint="#1E3A5F"
+                    app:strokeColor="#1E3A5F"
+                    app:strokeWidth="0.5dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnHisto"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="139dp"
+                    android:layout_height="48dp"
+                    android:text="History"
+                    android:textSize="14sp"
+                    app:icon="@drawable/histdash"
+                    app:cornerRadius="1dp"
+                    app:backgroundTint="#2E85AE"
+                    app:iconTint="#1E3A5F"
+                    app:strokeColor="#1E3A5F"
+                    app:strokeWidth="0.5dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAcc"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="Account"
+                    android:textSize="14sp"
+                    app:icon="@drawable/acc"
+                    app:cornerRadius="1dp"
+                    app:backgroundTint="#7ED6FF"
+                    app:iconTint="#1E3A5F"
+                    app:strokeColor="#1E3A5F"
+                    app:strokeWidth="0.5dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_marginTop="20dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -30,58 +116,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="28dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="4dp"
-                app:strokeWidth="1dp"
-                app:strokeColor="#E5E7EB">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="58dp"
-                            android:layout_height="52dp"
-                            android:backgroundTint="#E2E8F0"
-                            android:contentDescription="Avatar"
-                            />
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="52dp"
-                            android:layout_height="52dp"
-                            android:backgroundTint="#E2E8F0"
-                            android:layout_marginStart="-20dp"
-                            android:contentDescription="Avatar" />
-
-                    </LinearLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Account"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginStart="16dp"
-                        app:cornerRadius="14dp"
-                        app:backgroundTint="#7CC6FF"
-                        style="@style/Widget.MaterialComponents.Button" />
-
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -95,24 +129,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="16dp">
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
                         android:hint="Full Name"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="User Full Name"
+                            android:text="User Name"
                             android:enabled="false" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
                         android:hint="Email"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -126,6 +162,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
                         android:hint="Gender"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -139,6 +176,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
                         android:hint="Age"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -152,6 +190,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
                         android:hint="Weight"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -191,11 +230,5 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_gravity="bottom"
-        app:labelVisibilityMode="labeled" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

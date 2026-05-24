@@ -4,21 +4,94 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/bg_aquafill"
     android:fitsSystemWindows="true">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
+        android:id="@+id/header"
         android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/transparent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="40dp"
+        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:navigationIcon="@drawable/icon_back"
-        app:title="History"
-        app:titleTextColor="#1F2A44"
-        app:titleTextAppearance="@style/TextAppearance.Material3.TitleMedium" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="3dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/pic" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="AquaFill"
+            android:textColor="#1E3A5F"
+            android:textSize="28sp"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
+            android:letterSpacing="-0.02" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/navBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="0dp"
+        android:paddingTop="20dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_dashboard"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="145dp"
+            android:layout_height="48dp"
+            android:text="Dashboard"
+            android:textSize="14sp"
+            app:backgroundTint="#7ED6FF"
+            app:cornerRadius="1dp"
+            app:icon="@drawable/drinkdash"
+            app:iconTint="#1E3A5F"
+            app:strokeColor="#1E3A5F"
+            app:strokeWidth="0.5dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHisto"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="139dp"
+            android:layout_height="48dp"
+            android:text="History"
+            android:textSize="14sp"
+            app:icon="@drawable/histdash"
+            app:cornerRadius="1dp"
+            app:backgroundTint="#2E85AE"
+            app:iconTint="#1E3A5F"
+            app:strokeColor="#1E3A5F"
+            app:strokeWidth="0.5dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAcc"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="Account"
+            android:textSize="14sp"
+            app:icon="@drawable/acc"
+            app:cornerRadius="1dp"
+            app:backgroundTint="#7ED6FF"
+            app:iconTint="#1E3A5F"
+            app:strokeColor="#1E3A5F"
+            app:strokeWidth="0.5dp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_recent_title"
@@ -32,7 +105,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/navBar" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/history_card"
