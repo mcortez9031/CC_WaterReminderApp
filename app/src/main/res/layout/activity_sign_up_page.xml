@@ -12,6 +12,17 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/bgwater"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
         <!-- Title -->
         <TextView
             android:id="@+id/tvTitle"
@@ -52,7 +63,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:background="#BAD9F1" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Email -->
@@ -72,7 +84,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:background="#BAD9F1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Password -->
@@ -92,7 +105,8 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:background="#BAD9F1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Confirm Password -->
@@ -112,7 +126,8 @@
                 android:id="@+id/etConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:background="#BAD9F1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Sign Up Button -->

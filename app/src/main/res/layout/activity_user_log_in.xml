@@ -4,18 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#C0D2E4"
     tools:context=".UserLogIn">
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/bgwater"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Title -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Welcome!"
         android:textSize="28sp"
-        android:textColor="#1F2937"
+        android:textColor="#1A1A1A"
         android:textStyle="bold"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,14 +32,13 @@
         android:layout_marginTop="80dp"
         android:layout_marginHorizontal="32dp" />
 
-    <!-- Subtitle -->
     <TextView
         android:id="@+id/tvSubtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sign in to continue tracking your hydration"
         android:textSize="15.5sp"
-        android:textColor="#6B7280"
+        android:textColor="#666666"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +46,6 @@
         android:layout_marginTop="12dp"
         android:layout_marginHorizontal="40dp" />
 
-    <!-- Email Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etEmail"
         android:layout_width="0dp"
@@ -55,10 +61,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:background="#BAD9F1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etPassword"
         android:layout_width="0dp"
@@ -75,11 +81,11 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:background="#BAD9F1"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <!-- Login Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
@@ -95,7 +101,6 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="40dp" />
 
-    <!-- Sign Up Link -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,7 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Don't have an account? "
-            android:textColor="#6B7280"
+            android:textColor="#666666"
             android:textSize="15sp" />
 
         <TextView
