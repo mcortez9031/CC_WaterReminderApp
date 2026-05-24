@@ -3,6 +3,15 @@ package com.example.waterreminder.models;
 public class WaterLogInfo {
     int waterIntake;
     String dateTime;
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getWaterIntake() {
         return waterIntake;

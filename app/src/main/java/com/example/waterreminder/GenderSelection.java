@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -42,7 +43,7 @@ AlertDialog.Builder builder;
             editor.putString("gender", gender);
             editor.apply();
             if (gender.isEmpty()){
-                displayMessage("Missing", "Please select a Gender.");
+                Toast.makeText(this, "Please select gender.", Toast.LENGTH_SHORT).show();
                 return;
             }
             Intent intent = new Intent(GenderSelection.this, AgeSelection.class);

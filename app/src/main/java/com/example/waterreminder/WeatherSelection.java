@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +16,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class WeatherSelection extends AppCompatActivity {
-Button next;
-CardView hot, cold, mild;
-ImageView back;
-    String tempt = "mild"; // Default fallback selection
+    Button next;
+    CardView hot, cold, mild;
+    ImageView back;
+    String tempt = "mild";
+    boolean isClick = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,10 @@ ImageView back;
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("weather", tempt);
             editor.apply();
+            if (!isClick){
+                Toast.makeText(this, "Please select weather.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Intent intent = new Intent(WeatherSelection.this, SignUpPage.class);
             startActivity(intent);
         });
@@ -45,6 +52,7 @@ ImageView back;
             cold.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             mild.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             tempt = "hot";
+            isClick = true;
         });
 
         cold.setOnClickListener(v -> {
@@ -52,12 +60,14 @@ ImageView back;
             hot.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             mild.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             tempt = "cold";
+            isClick = true;
         });
         mild.setOnClickListener(v -> {
             mild.setCardBackgroundColor(Color.parseColor("#FFC5E6EA"));
             cold.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             hot.setCardBackgroundColor(Color.parseColor("#FFFFFF"));
             tempt = "mild";
+            isClick = true;
         });
 
         back.setOnClickListener(v -> {

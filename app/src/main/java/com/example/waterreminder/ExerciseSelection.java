@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
@@ -38,6 +39,10 @@ public class ExerciseSelection extends AppCompatActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString("Activity Level", activity_level);
             editor.apply();
+            if (activity_level.isEmpty()){
+                Toast.makeText(this, "Please select your Activity Level.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Intent intent = new Intent(ExerciseSelection.this, WeatherSelection.class);
             startActivity(intent);
         });

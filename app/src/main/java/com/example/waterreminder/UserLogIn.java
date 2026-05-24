@@ -56,11 +56,11 @@ public class UserLogIn extends AppCompatActivity {
             if (!userFound){
                 displayMessage("LogIn Error!", "Incorrect username or password");
             }else {
-                SharedPreferences sharedPref = getSharedPreferences("AquaFill", MODE_PRIVATE);
+                SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
 
                 editor.putBoolean("isLoggedIn", true);
-                editor.putString("userEmail", etEmailInput.getText().toString().trim());
+                editor.putString("email", etEmailInput.getText().toString().trim());
                 editor.apply();
                 Intent intent = new Intent(UserLogIn.this, Dashboard.class);
                 startActivity(intent);

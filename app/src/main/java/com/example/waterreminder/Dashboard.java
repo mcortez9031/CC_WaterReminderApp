@@ -78,8 +78,9 @@ public class Dashboard extends AppCompatActivity {
                 dialog.show();
             });
 
-            btnHisto.setOnClickListener(v ->
-                    Toast.makeText(this, "History coming soon...", Toast.LENGTH_SHORT).show());
+            btnHisto.setOnClickListener(v -> {
+                startActivity(new Intent(Dashboard.this, History.class));
+            });
 
         } catch (Exception e) {
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -111,10 +112,10 @@ public class Dashboard extends AppCompatActivity {
         if (tvWaterIntake == null || progressBar == null) return;
 
         int total = databaseHelper.getDailyTotal(email);
-        tvWaterIntake.setText(total);
+        tvWaterIntake.setText(String.valueOf(total));
         progressBar.setMax(dailyGoal);
         progressBar.setProgress(Math.min(total, dailyGoal));
-        tvDailyGoal.setText(dailyGoal);
+        tvDailyGoal.setText(String.valueOf(dailyGoal));
     }
 
     private void setReminder() {

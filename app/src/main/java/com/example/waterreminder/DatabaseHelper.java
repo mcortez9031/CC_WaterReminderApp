@@ -16,10 +16,10 @@
     import java.util.Locale;
     
     public class DatabaseHelper extends SQLiteOpenHelper {
-    
+
         private static final String DATABASE_NAME = "WaterIntake.db";
         private static final int DATABASE_VERSION = 3;
-    
+
         // User Info Table
         private static final String TABLE_NAME = "user_info";
         private static final String COLUMN_ID = "userID";
@@ -33,17 +33,17 @@
         private static final String COLUMN_WATER_GOAL = "user_daily_goal";
         private static final String COLUMN_WEATHER = "current_weather";
         private static final String COLUMN_IS_DELETED = "deleted";
-    
+
         // Water Log Table
         private static final String NAME_TABLE = "water_log";
         private static final String COL_ID = "id";
         private static final String COL_AMOUNT = "amount";
         private static final String COL_TIMESTAMP = "timestamp";
-    
+
         public DatabaseHelper(@Nullable Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
-    
+
         @Override
         public void onCreate(SQLiteDatabase db) {
             String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
@@ -59,7 +59,7 @@
                     + COLUMN_WEATHER + " TEXT, "
                     + COLUMN_IS_DELETED + " INTEGER DEFAULT 0)";
             db.execSQL(CREATE_USER_TABLE);
-    
+
             String CREATE_LOG_TABLE = "CREATE TABLE " + NAME_TABLE + " ("
                     + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + COLUMN_EMAIL + " TEXT, "
@@ -67,25 +67,25 @@
                     + COL_TIMESTAMP + " TEXT)";
             db.execSQL(CREATE_LOG_TABLE);
         }
-    
+
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             db.execSQL("DROP TABLE IF EXISTS " + NAME_TABLE);
             onCreate(db);
         }
-    
+
         public boolean addUser(String username, String password, String email,
                                String gender, int weight, String activity_level,
                                double water_goal, String weather) {
             SQLiteDatabase db = null;
             try {
                 db = this.getWritableDatabase();
-    
+
                 if (isUserExists(db, username, email)) {
                     return false;
                 }
-    
+
                 ContentValues cv = new ContentValues();
                 cv.put(COLUMN_USERNAME, username);
                 cv.put(COLUMN_PASSWORD, password);
@@ -96,10 +96,10 @@
                 cv.put(COLUMN_WATER_GOAL, (int) water_goal);
                 cv.put(COLUMN_WEATHER, weather);
                 cv.put(COLUMN_IS_DELETED, 0);
-    
+
                 long result = db.insert(TABLE_NAME, null, cv);
                 return result != -1;
-    
+
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
@@ -109,7 +109,7 @@
                 }
             }
         }
-    
+
         private boolean isUserExists(SQLiteDatabase db, String username, String email) {
             Cursor cursor = null;
             try {
@@ -173,15 +173,16 @@
                 if (cursor != null) cursor.close();
             }
         }
+
         public ArrayList<WaterLogInfo> getHistory(String email) {
             ArrayList<WaterLogInfo> historyList = new ArrayList<>();
             SQLiteDatabase db = this.getReadableDatabase();
-    
+
             String query = "SELECT " + COL_AMOUNT + ", " + COL_TIMESTAMP + " FROM "
                     + NAME_TABLE + " WHERE " + COLUMN_EMAIL + " = ?"
                     + " ORDER BY " + COL_TIMESTAMP + " DESC";
             Cursor cursor = db.rawQuery(query, new String[]{email});
-    
+
             if (cursor != null) {
                 while (cursor.moveToNext()) {
                     WaterLogInfo waterLogInfo = new WaterLogInfo(cursor.getInt(0), cursor.getString(1));
@@ -224,5 +225,29 @@
             int result = db.update(TABLE_NAME, cv, COLUMN_EMAIL + " = ?", new String[]{email});
             db.close();
             return result > 0;
+        }
+
+        public ArrayList<WaterLogInfo> getAllLogs(String email) {
+            SQLiteDatabase db = this.getReadableDatabase();
+            ArrayList<WaterLogInfo> list = new ArrayList<>();
+
+            Cursor cursor = db.rawQuery(
+                    "SELECT " + COL_AMOUNT + ", " + COL_TIMESTAMP +
+                            " FROM " + NAME_TABLE +
+                            " WHERE " + COLUMN_EMAIL + " = ?",
+                    new String[]{email}
+            );
+
+            if (cursor != null) {
+                while (cursor.moveToNext()) {
+                    int amount = cursor.getInt(0);
+                    String timestamp = cursor.getString(1);
+
+                    WaterLogInfo waterLogInfo = new WaterLogInfo(amount, timestamp);
+                    list.add(waterLogInfo);
+                }
+                cursor.close();
+            }
+            return list;
         }
     }

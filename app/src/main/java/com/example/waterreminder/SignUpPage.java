@@ -48,7 +48,7 @@ public class SignUpPage extends AppCompatActivity {
         // ====================== Find Views ======================
         tilUsername = findViewById(R.id.tilFullName);
         tilEmail = findViewById(R.id.tilEmail);
-        tilPassword = findViewById(R.id.tilPassword);           // ← Was missing
+        tilPassword = findViewById(R.id.tilPassword);
         tilConfirmPassword = findViewById(R.id.tilConfirmPassword);
 
         btnSignUp = findViewById(R.id.btnSignUp);
