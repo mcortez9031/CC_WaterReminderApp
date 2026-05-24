@@ -60,7 +60,7 @@
                 android:gravity="center_vertical">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_dashboard"
+                    android:id="@+id/btnDashboard"
                     style="@style/Widget.Material3.Button"
                     android:layout_width="145dp"
                     android:layout_height="48dp"
@@ -82,7 +82,7 @@
                     android:textSize="14sp"
                     app:icon="@drawable/histdash"
                     app:cornerRadius="1dp"
-                    app:backgroundTint="#2E85AE"
+                    app:backgroundTint="#7ED6FF"
                     app:iconTint="#1E3A5F"
                     app:strokeColor="#1E3A5F"
                     app:strokeWidth="0.5dp" />
@@ -96,12 +96,26 @@
                     android:textSize="14sp"
                     app:icon="@drawable/acc"
                     app:cornerRadius="1dp"
-                    app:backgroundTint="#7ED6FF"
+                    app:backgroundTint="#2E85AE"
                     app:iconTint="#1E3A5F"
                     app:strokeColor="#1E3A5F"
                     app:strokeWidth="0.5dp" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_recent_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Account View"
+                android:textColor="#1F2A44"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:letterSpacing="-0.02"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/navBar" />
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

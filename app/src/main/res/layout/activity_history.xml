@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_dashboard"
+            android:id="@+id/btnDashboard"
             style="@style/Widget.Material3.Button"
             android:layout_width="145dp"
             android:layout_height="48dp"

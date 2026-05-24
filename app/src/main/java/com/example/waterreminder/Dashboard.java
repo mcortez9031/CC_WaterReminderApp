@@ -18,7 +18,7 @@ public class Dashboard extends AppCompatActivity {
     private TextView tvWaterIntake, tvDailyGoal;
     private ProgressBar progressBar;
     private EditText etAmount;
-    private Button btnAdd, btnReminder, btnHisto;
+    private Button btnAdd, btnReminder, btnHisto, btnAcc;
     private DatabaseHelper databaseHelper;
     private String email = "";
     private int dailyGoal = 0;
@@ -39,6 +39,7 @@ public class Dashboard extends AppCompatActivity {
             btnReminder = findViewById(R.id.btnReminder);
             btnHisto = findViewById(R.id.btnHisto);
             tvDailyGoal = findViewById(R.id.tvDailyGoal);
+            btnAcc = findViewById(R.id.btnAcc);
 
 
             databaseHelper = new DatabaseHelper(this);
