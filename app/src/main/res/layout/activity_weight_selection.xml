@@ -136,7 +136,7 @@
             android:layout_height="wrap_content"
             android:valueFrom="20"
             android:valueTo="230"
-            android:value="10"
+            android:value="60"
             android:stepSize="1"
             app:trackHeight="12dp"
             app:thumbRadius="16dp"

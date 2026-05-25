@@ -92,7 +92,7 @@ public class SignUpPage extends AppCompatActivity {
             weight = sharedPref.getInt("weight", 60);
             activity_level = sharedPref.getString("Activity Level", "Moderate");
             weather = sharedPref.getString("weather", "mild");
-            age = sharedPref.getInt("age", 0);
+            age = sharedPref.getInt("user_age", 0);
             saveEmailToPreferences(email);
 
 
@@ -134,7 +134,7 @@ public class SignUpPage extends AppCompatActivity {
 
 
             boolean success = databaseHelper.addUser(username, password, email,
-                    gender, weight, activity_level, water_goal, weather);
+                    gender, age, weight, activity_level, water_goal, weather);
 
             if (success) {
                 AlertDialog.Builder successBuilder = new AlertDialog.Builder(this);

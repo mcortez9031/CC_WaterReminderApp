@@ -23,7 +23,7 @@ public class WeightSelection extends AppCompatActivity {
         setContentView(R.layout.activity_weight_selection);
 
             initViews();
-            setupAgeSlider();
+            setupWeightSlider();
             setupButtons();
         }
 
@@ -32,10 +32,9 @@ public class WeightSelection extends AppCompatActivity {
             btnContinue = findViewById(R.id.btn_next);
         }
 
-        private void setupAgeSlider() {
+        private void setupWeightSlider() {
             updateWeightDisplay((int) weightSlider.getValue());
 
-            // Slider value change listener
             weightSlider.addOnChangeListener(new Slider.OnChangeListener() {
                 @Override
                 public void onValueChange(Slider slider, float value, boolean fromUser) {
@@ -45,20 +44,17 @@ public class WeightSelection extends AppCompatActivity {
         }
 
         private void updateWeightDisplay(int weight) {
-            // Find the TextView and update it
             if (findViewById(R.id.tv_weight) != null) {
                 ((android.widget.TextView) findViewById(R.id.tv_weight)).setText(String.valueOf(weight));
             }
         }
 
         private void setupButtons() {
-            // Back Button
             findViewById(R.id.btn_back).setOnClickListener(v -> {
                 Intent intent = new Intent(WeightSelection.this, AgeSelection.class);
                 startActivity(intent);
             });
 
-            // Continue Button
             btnContinue.setOnClickListener(v -> {
                 int selectedWeight = (int) weightSlider.getValue();
 

@@ -46,11 +46,9 @@ public class AccountView extends AppCompatActivity {
         tvGender = findViewById(R.id.tvGenderValue);
         tvActivityLevel = findViewById(R.id.tvActivityLevelValue);
         tvWeather = findViewById(R.id.tvWeatherValue);
-
         databaseHelper = new DatabaseHelper(this);
         SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);
         email = sharedPref.getString("email", "");
-
         loadData(email);
         setOnCLickListeners();
     }
@@ -86,17 +84,75 @@ public class AccountView extends AppCompatActivity {
         }
         builder.setView(input);
 
-        builder.setPositiveButton("OK", (dialog, which) -> {
-            String val = input.getText().toString().trim();
-            if (!val.isEmpty()) {
-                target.setText(val);
+        builder.setPositiveButton("OK", null);
+        builder.setNegativeButton("Cancel", null);
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            String val = input.getText().toString().trim();
+
+            if (validateInput(val, input, fieldType)) {
+                target.setText(val);
                 saveFieldToDatabase(fieldType);
+                dialog.dismiss();
             }
         });
+    }
 
-        builder.setNegativeButton("Cancel", null);
-        builder.show();
+    private boolean validateInput(String val, EditText input, String fieldType) {
+        if (val.isEmpty()) {
+            input.setError("This field cannot be empty");
+            return false;
+        }
+
+        switch (fieldType) {
+            case "age":
+                try {
+                    int age = Integer.parseInt(val);
+                    if (age < 1 || age > 120) {
+                        input.setError("Please enter a valid age between 1 and 120");
+                        return false;
+                    }
+                } catch (NumberFormatException e) {
+                    input.setError("Please enter a whole number");
+                    return false;
+                }
+                break;
+
+            case "weight":
+                try {
+                    double weight = Double.parseDouble(val);
+                    if (weight < 20.0 || weight > 300.0) {
+                        input.setError("Please enter a realistic weight between 20kg and 300kg");
+                        return false;
+                    }
+                } catch (NumberFormatException e) {
+                    input.setError("Please enter a valid weight number");
+                    return false;
+                }
+                break;
+
+            case "weather":
+                String cleanWeather = val.toLowerCase();
+                if (!cleanWeather.equals("hot") && !cleanWeather.equals("mild") && !cleanWeather.equals("cold")) {
+                    input.setError("Acceptable options: hot, mild, cold");
+                    return false;
+                }
+                break;
+
+            case "activity":
+                String cleanAct = val.toLowerCase();
+                if (!cleanAct.equals("high") && !cleanAct.equals("very active") &&
+                        !cleanAct.equals("active") && !cleanAct.equals("moderate") &&
+                        !cleanAct.equals("low") && !cleanAct.equals("sedentary")) {
+                    input.setError("Options: sedentary, low, moderate, active, high, very active");
+                    return false;
+                }
+                break;
+        }
+        return true;
     }
 
     private void saveFieldToDatabase(String fieldType) {
@@ -110,7 +166,7 @@ public class AccountView extends AppCompatActivity {
         int currentWeight = 0;
         try {
             if (!ageStr.isEmpty()) currentAge = Integer.parseInt(ageStr);
-            if (!weightStr.isEmpty()) currentWeight = Integer.parseInt(weightStr);
+            if (!weightStr.isEmpty()) currentWeight = (int) Double.parseDouble(weightStr);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -143,7 +199,6 @@ public class AccountView extends AppCompatActivity {
         if (isSaveSuccessful) {
             Toast.makeText(this, successMessage, Toast.LENGTH_SHORT).show();
 
-            // Run calculations with the updated values
             double newWaterGoal = updateCalculation(currentAge, currentWeather, currentWeight, currentActivity, currentGender);
             databaseHelper.updateWaterGoal(newWaterGoal, email);
         } else {
@@ -154,9 +209,9 @@ public class AccountView extends AppCompatActivity {
     public double updateCalculation(int age, String weather, int weight, String activityLevel, String gender){
         double water_goal = weight * 35.0;
 
-        if ("hot".equals(weather)) {
+        if ("hot".equalsIgnoreCase(weather)) {
             water_goal += 500;
-        } else if ("mild".equals(weather)) {
+        } else if ("mild".equalsIgnoreCase(weather)) {
             water_goal += 250;
         }
 
@@ -176,6 +231,7 @@ public class AccountView extends AppCompatActivity {
             switch (activityLevel.toLowerCase()) {
                 case "high":
                 case "very active":
+                case "active":
                     water_goal *= 1.30;
                     break;
                 case "moderate":
@@ -197,9 +253,10 @@ public class AccountView extends AppCompatActivity {
         editor.clear();
         editor.apply();
 
-        Intent intent = new Intent(AccountView.this, Dashboard.class);
-
+        Intent intent = new Intent(AccountView.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void loadData(String email){

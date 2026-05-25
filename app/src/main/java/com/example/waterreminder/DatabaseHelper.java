@@ -77,7 +77,7 @@
         }
 
         public boolean addUser(String username, String password, String email,
-                               String gender, int weight, String activity_level,
+                               String gender, int age, int weight, String activity_level,
                                double water_goal, String weather) {
             SQLiteDatabase db = null;
             try {
@@ -92,6 +92,7 @@
                 cv.put(COLUMN_PASSWORD, password);
                 cv.put(COLUMN_EMAIL, email);
                 cv.put(COLUMN_GENDER, gender);
+                cv.put(COLUMN_AGE, age);
                 cv.put(COLUMN_WEIGHT, weight);
                 cv.put(COLUMN_ACTIVITY_LEVEL, activity_level);
                 cv.put(COLUMN_WATER_GOAL, (int) water_goal);
