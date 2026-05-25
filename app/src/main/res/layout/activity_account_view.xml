@@ -2,12 +2,23 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://tools.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_aquafill"
     tools:context=".AccountView"
     android:id="@+id/main">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/bgwater"
+        android:scaleType="centerCrop"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -103,7 +114,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_recent_title"
+                android:id="@+id/tvAccountTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Account View"
@@ -112,17 +123,16 @@
                 android:textStyle="bold"
                 android:letterSpacing="-0.02"
                 android:layout_marginTop="8dp"
-                android:layout_gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/navBar" />
+                android:layout_gravity="center" />
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="88dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -134,6 +144,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardBackgroundColor="#C0D9FF"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="6dp"
                 app:strokeWidth="1dp"
@@ -143,106 +154,199 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvFullName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Full Name"
+                        android:textColor="#7F8C8D"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvFullNameValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="Full Name"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:layout_marginBottom="16dp"
+                        android:textColor="#1F2A44"
+                        android:textSize="16sp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="User Name"
-                            android:enabled="false" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email"
+                        android:textColor="#7F8C8D"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvEmailValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="Email"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:layout_marginBottom="16dp"
+                        android:textColor="#1F2A44"
+                        android:textSize="16sp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="userexample@gmail.com"
-                            android:enabled="false" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Gender"
+                        android:textColor="#7F8C8D"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvGenderValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="Gender"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:layout_marginBottom="16dp"
+                        android:textColor="#1F2A44"
+                        android:textSize="16sp" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Male"
-                            android:enabled="false" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvAge"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="Age"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:text="Age"
+                        android:textColor="#7F8C8D"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="1dp" >
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvAgeValue"
+                            android:layout_width="250dp"
                             android:layout_height="wrap_content"
-                            android:text="24"
-                            android:enabled="false" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:layout_marginBottom="16dp"
+                            android:textColor="#1F2A44"
+                            android:textSize="16sp" />
+                        <ImageButton
+                            android:id="@+id/btnAgeEdit"
+                            android:layout_width="55dp"
+                            android:layout_height="55dp"
+                            android:src="@drawable/pencil"
+                            android:backgroundTint="#C0D9FF">
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
+                        </ImageButton>
+                </LinearLayout>>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvWeight"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:hint="Weight"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="46 kg"
-                            android:enabled="false" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
+                        android:text="Weight"
+                        android:textColor="#7F8C8D"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="1dp" >
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvWeightValue"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:hint="Activity Level"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:layout_marginBottom="16dp"
+                        android:textColor="#1F2A44"
+                        android:textSize="16sp" />
+                    <ImageButton
+                        android:id="@+id/btnWeightEdit"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/pencil"
+                        android:backgroundTint="#C0D9FF">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Rarely Active"
-                            android:enabled="false" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                    </ImageButton>
+                </LinearLayout>
 
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvActivityLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Activity Level (Rarely, Light, Moderate, Active)"
+                        android:textColor="#7F8C8D"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="1dp" >
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvActivityLevelValue"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:textColor="#1F2A44"
+                        android:textSize="16sp" />
+                    <ImageButton
+                        android:id="@+id/btnActLvlEdit"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/pencil"
+                        android:backgroundTint="#C0D9FF">
+
+                    </ImageButton>
+                </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvWeather"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Weather (hot, mild, cold)"
+                        android:textColor="#7F8C8D"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="1dp" >
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvWeatherValue"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="#1F2A44"
+                        android:textSize="16sp" />
+
+                    <ImageButton
+                        android:id="@+id/btnWeatherEdit"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/pencil"
+                        android:backgroundTint="#C0D9FF">
+
+                    </ImageButton>
+                </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:layout_marginTop="32dp"
-                android:text="← Back to Dashboard"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:cornerRadius="16dp"
-                app:backgroundTint="#4A9FFF"
-                style="@style/Widget.MaterialComponents.Button" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLogout"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="16dp"
+        android:text="Logout"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="#4A9FFF"
+        app:cornerRadius="16dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

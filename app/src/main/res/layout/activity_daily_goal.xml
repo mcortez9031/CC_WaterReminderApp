@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#0A84FF">
 
-    <!-- Title -->
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
@@ -20,7 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="58dp" />
 
-    <!-- Info Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/info_card"
         android:layout_width="0dp"
@@ -59,8 +57,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Glass Container with Text Inside -->
-    <!-- Glass Container - Adjusted Size to Match Screenshot -->
     <FrameLayout
         android:layout_width="500dp"
         android:layout_height="500dp"
@@ -69,7 +65,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="0dp">
 
-        <!-- Glass Image -->
         <ImageView
             android:id="@+id/iv_glass"
             android:layout_width="500dp"
@@ -78,7 +73,6 @@
             android:scaleType="fitCenter"
             android:contentDescription="Water Glass" />
 
-        <!-- Goal Number Inside Glass -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +93,7 @@
         </LinearLayout>
 
     </FrameLayout>
-    <!-- Start Button -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_start"
         android:layout_width="0dp"

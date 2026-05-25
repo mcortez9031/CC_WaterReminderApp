@@ -7,6 +7,16 @@
     android:background="@drawable/bg_aquafill"
     android:fitsSystemWindows="true">
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/bgwater"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="0dp"
@@ -150,21 +160,10 @@
             android:layout_weight="1"
             android:layout_height="56dp"
             android:text="Delete"
-            android:textColor="#64748B"
+            android:textColor="#444445"
             app:strokeColor="#E2E8F0"
-            app:cornerRadius="20dp"
-            android:layout_marginEnd="10dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnBack"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="56dp"
-            android:text="Back"
-            app:icon="@drawable/icon_back"
-            app:iconGravity="start"
-            app:backgroundTint="#4A9FFF"
+            android:backgroundTint="#C8D5E8"
+            android:drawableLeft="@drawable/ic_delete"
             app:cornerRadius="20dp"
             android:layout_marginEnd="10dp" />
 
@@ -175,6 +174,7 @@
             android:layout_weight="1"
             android:layout_height="56dp"
             android:text="Clear History"
+            android:drawableLeft="@drawable/trash"
             android:textColor="#FFFFFF"
             app:backgroundTint="#F87171"
             app:cornerRadius="20dp"

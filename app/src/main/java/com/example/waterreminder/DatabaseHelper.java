@@ -7,7 +7,8 @@
     import android.database.Cursor;
     
     import androidx.annotation.Nullable;
-    
+
+    import com.example.waterreminder.models.UserInfo;
     import com.example.waterreminder.models.WaterLogInfo;
     
     import java.text.SimpleDateFormat;
@@ -174,25 +175,6 @@
             }
         }
 
-        public ArrayList<WaterLogInfo> getHistory(String email) {
-            ArrayList<WaterLogInfo> historyList = new ArrayList<>();
-            SQLiteDatabase db = this.getReadableDatabase();
-
-            String query = "SELECT " + COL_AMOUNT + ", " + COL_TIMESTAMP + " FROM "
-                    + NAME_TABLE + " WHERE " + COLUMN_EMAIL + " = ?"
-                    + " ORDER BY " + COL_TIMESTAMP + " DESC";
-            Cursor cursor = db.rawQuery(query, new String[]{email});
-
-            if (cursor != null) {
-                while (cursor.moveToNext()) {
-                    WaterLogInfo waterLogInfo = new WaterLogInfo(cursor.getInt(0), cursor.getString(1));
-                    historyList.add(waterLogInfo);
-                }
-                cursor.close();
-            }
-            db.close();
-            return historyList;
-        }
 
         public int waterGoal(String email) {
             if (email == null || email.isEmpty()) {
@@ -232,22 +214,87 @@
             ArrayList<WaterLogInfo> list = new ArrayList<>();
 
             Cursor cursor = db.rawQuery(
-                    "SELECT " + COL_AMOUNT + ", " + COL_TIMESTAMP +
-                            " FROM " + NAME_TABLE +
+                    "SELECT " + COL_ID + ", " + COL_AMOUNT + ", " + COL_TIMESTAMP + " FROM " + NAME_TABLE +
                             " WHERE " + COLUMN_EMAIL + " = ?",
                     new String[]{email}
             );
 
             if (cursor != null) {
                 while (cursor.moveToNext()) {
-                    int amount = cursor.getInt(0);
-                    String timestamp = cursor.getString(1);
+                    String id = cursor.getString(0);
+                    int amount = cursor.getInt(1);
+                    String timestamp = cursor.getString(2);
 
-                    WaterLogInfo waterLogInfo = new WaterLogInfo(amount, timestamp);
+                    WaterLogInfo waterLogInfo = new WaterLogInfo(id, amount, timestamp);
                     list.add(waterLogInfo);
                 }
                 cursor.close();
             }
             return list;
+        }
+
+        public ArrayList<UserInfo> getUserInfo(String email){
+            ArrayList<UserInfo> infoList = new ArrayList<>();
+            SQLiteDatabase database = this.getReadableDatabase();
+
+            String query = "SELECT " + COLUMN_USERNAME + ", " + COLUMN_EMAIL + ", " + COLUMN_GENDER + ", "
+                    + COLUMN_WEIGHT + ", " + COLUMN_AGE + ", " + COLUMN_ACTIVITY_LEVEL
+                    + ", " + COLUMN_WEATHER + " FROM " + TABLE_NAME + " WHERE " + COLUMN_EMAIL + " = ?";
+            Cursor cursor = database.rawQuery(query, new String[]{email});
+            if(cursor.moveToFirst()){
+                do{
+                    infoList.add(new UserInfo(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3),
+                            cursor.getInt(4), cursor.getString(5), cursor.getString(6)));
+                }while(cursor.moveToNext());
+            }
+            cursor.close();
+            return infoList;
+        }
+        public boolean updateUserAge(int age, String email){
+            SQLiteDatabase database = this.getWritableDatabase();
+
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_AGE, age);
+            return database.update(TABLE_NAME, cv, COLUMN_EMAIL + " = ?", new String[]{email}) > 0;
+        }
+
+        public boolean updateUserWeight(int weight, String email){
+            SQLiteDatabase database = this.getWritableDatabase();
+
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_WEIGHT, weight);
+            return database.update(TABLE_NAME, cv, COLUMN_EMAIL + " = ?", new String[]{email}) > 0;
+        }
+        public boolean updateUserActivityLevel(String activityLevel, String email){
+            SQLiteDatabase database = this.getWritableDatabase();
+
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_ACTIVITY_LEVEL, activityLevel);
+            return database.update(TABLE_NAME, cv, COLUMN_EMAIL + " = ?", new String[]{email}) > 0;
+        }
+        public boolean updateUserWeather(String weather, String email){
+            SQLiteDatabase database = this.getWritableDatabase();
+
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_WEATHER, weather);
+            return database.update(TABLE_NAME, cv, COLUMN_EMAIL + " = ?", new String[]{email}) > 0;
+        }
+
+        public boolean updateWaterGoal(double waterGoal, String email) {
+            SQLiteDatabase database = this.getWritableDatabase();
+
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_WATER_GOAL, waterGoal);
+            return database.update(TABLE_NAME, cv, COLUMN_EMAIL + " = ?", new String[]{email}) > 0;
+        }
+
+        public boolean deleteLog(String logId) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            return db.delete(NAME_TABLE, COL_ID + " = ?", new String[]{logId}) > 0;
+        }
+
+        public boolean clearAllLogs(String email) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            return db.delete(NAME_TABLE, COLUMN_EMAIL + " = ?", new String[]{email}) > 0;
         }
     }

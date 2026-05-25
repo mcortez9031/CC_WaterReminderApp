@@ -18,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Back -->
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="48dp"
@@ -42,7 +41,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp" />
 
-    <!-- Choose Age Title -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
@@ -58,7 +56,6 @@
         android:layout_marginHorizontal="32dp"
         tools:ignore="MissingConstraints" />
 
-    <!-- Info Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/infoCard"
         android:layout_width="0dp"
@@ -98,7 +95,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- AGE SLIDER -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -108,7 +104,6 @@
         android:layout_marginTop="48dp"
         android:layout_marginHorizontal="32dp">
 
-        <!-- Age Display -->
         <TextView
             android:id="@+id/tvAge"
             android:layout_width="wrap_content"
@@ -135,12 +130,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="4dp" />
 
-        <!-- Slider -->
         <com.google.android.material.slider.Slider
             android:id="@+id/ageSlider"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:valueFrom="0"
+            android:valueFrom="1"
             android:valueTo="100"
             android:value="20"
             android:stepSize="1"
@@ -156,11 +150,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="48dp" />
 
-        <!-- Min & Max -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="12"
+            android:text="1"
             android:textColor="#94A3B8"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/ageSlider"

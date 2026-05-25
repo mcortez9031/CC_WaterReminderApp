@@ -8,7 +8,6 @@
     android:background="@color/background_color"
     tools:context=".MainActivity">
 
-    <!-- Background Shape Bottom -->
     <ImageView
         android:id="@+id/bg_bottom"
         android:layout_width="match_parent"
@@ -19,7 +18,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Background Shape Top -->
     <ImageView
         android:id="@+id/bg_top"
         android:layout_width="match_parent"
@@ -30,7 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Water Drop Icon -->
     <ImageView
         android:id="@+id/iv_water_drop"
         android:layout_width="280dp"
@@ -42,7 +39,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Main Title -->
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="0dp"
@@ -61,7 +57,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Subtitle -->
     <TextView
         android:id="@+id/tv_subtitle"
         android:layout_width="0dp"
@@ -79,7 +74,6 @@
         android:layout_marginEnd="45dp"
         android:layout_marginTop="80dp" />
 
-    <!-- Next Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"
         android:layout_width="140dp"

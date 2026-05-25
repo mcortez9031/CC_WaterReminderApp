@@ -1,6 +1,7 @@
 package com.example.waterreminder;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -17,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("user_profile", MODE_PRIVATE);
+        boolean logIn = sharedPreferences.getBoolean("isLoggedIn", false);
+        if (logIn){
+            startActivity(new Intent(MainActivity.this, Dashboard.class));
+        }
         setContentView(R.layout.activity_main);
 
         next=findViewById(R.id.btn_next);
@@ -24,5 +30,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent= new Intent(MainActivity.this, UserLogIn.class);
             startActivity(intent);
         });
+
     }
 }

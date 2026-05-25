@@ -15,10 +15,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class SignUpPage extends AppCompatActivity {
 
-    // TextInputLayouts
     private TextInputLayout tilUsername, tilEmail, tilPassword, tilConfirmPassword;
 
-    // EditTexts inside the layouts
     private TextInputEditText etUsernameInput, etEmailInput, etPasswordInput, etConfirmPasswordInput;
 
     Button btnSignUp;
@@ -38,14 +36,11 @@ public class SignUpPage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sign_up_page);
 
-        // Initialize DatabaseHelper
         databaseHelper = new DatabaseHelper(SignUpPage.this);
 
-        // Initialize AlertDialog builders
         builder = new AlertDialog.Builder(this);
         successMessage = new AlertDialog.Builder(this);
 
-        // ====================== Find Views ======================
         tilUsername = findViewById(R.id.tilFullName);
         tilEmail = findViewById(R.id.tilEmail);
         tilPassword = findViewById(R.id.tilPassword);
@@ -53,13 +48,11 @@ public class SignUpPage extends AppCompatActivity {
 
         btnSignUp = findViewById(R.id.btnSignUp);
 
-        // Get the actual EditText from each TextInputLayout
         etUsernameInput = (TextInputEditText) tilUsername.getEditText();
         etEmailInput = (TextInputEditText) tilEmail.getEditText();
         etPasswordInput = (TextInputEditText) tilPassword.getEditText();
         etConfirmPasswordInput = (TextInputEditText) tilConfirmPassword.getEditText();
 
-        // Safety check
         if (etUsernameInput == null || etEmailInput == null ||
                 etPasswordInput == null || etConfirmPasswordInput == null) {
             displayMessage("Error", "Failed to initialize input fields");
@@ -72,19 +65,16 @@ public class SignUpPage extends AppCompatActivity {
             String password = etPasswordInput.getText().toString().trim();
             String confirmPassword = etConfirmPasswordInput.getText().toString().trim();
 
-            // Empty field check
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 displayMessage("Input Error!", "Please fill all fields");
                 return;
             }
 
-            // Password confirmation check
             if (!password.equals(confirmPassword)) {
                 displayMessage("Password Mismatch", "Passwords do not match.");
                 return;
             }
 
-            // Password strength
             String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-+=])(?=\\S+$).{8,20}$";
             if (!password.matches(PASSWORD_PATTERN)) {
                 displayMessage("Weak Password",
@@ -92,13 +82,11 @@ public class SignUpPage extends AppCompatActivity {
                 return;
             }
 
-            // Email validation
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 displayMessage("Invalid Email", "Please enter a valid email address.");
                 return;
             }
 
-            // Load user profile data
             SharedPreferences sharedPref = getSharedPreferences("user_profile", Context.MODE_PRIVATE);
             gender = sharedPref.getString("gender", "Not Specified");
             weight = sharedPref.getInt("weight", 60);
@@ -144,7 +132,7 @@ public class SignUpPage extends AppCompatActivity {
                 }
             }
 
-            // Add user to database
+
             boolean success = databaseHelper.addUser(username, password, email,
                     gender, weight, activity_level, water_goal, weather);
 

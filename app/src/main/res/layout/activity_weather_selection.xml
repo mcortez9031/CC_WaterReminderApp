@@ -16,7 +16,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-    <!-- Top Bar -->
     <ImageView
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
@@ -39,7 +38,6 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp" />
 
-    <!-- Title -->
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="0dp"
@@ -56,7 +54,6 @@
         android:layout_marginTop="36dp"
         android:layout_marginHorizontal="32dp" />
 
-    <!-- Info Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/info_card"
         android:layout_width="0dp"
@@ -68,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="28dp">
+        android:layout_marginTop="26dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +86,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Climate Options -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -97,10 +93,9 @@
         app:layout_constraintTop_toBottomOf="@id/info_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:layout_marginHorizontal="32dp">
 
-        <!-- Hot -->
         <androidx.cardview.widget.CardView
             android:id="@+id/temptHot"
             android:layout_width="match_parent"
@@ -137,7 +132,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Temperate -->
         <androidx.cardview.widget.CardView
             android:id="@+id/temptMild"
             android:layout_width="match_parent"
@@ -174,7 +168,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Cold -->
         <androidx.cardview.widget.CardView
             android:id="@+id/temptCold"
             android:layout_width="match_parent"
@@ -212,7 +205,6 @@
 
     </LinearLayout>
 
-    <!-- Next Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"
         android:layout_width="0dp"

@@ -3,7 +3,6 @@ package com.example.waterreminder;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +18,7 @@ public class History extends AppCompatActivity {
     private RecyclerView rvHistory;
     private DatabaseHelper databaseHelper;
     private Button btnDashboard, btnHisto, btnAcc;
-    private MaterialButton btnBack, btnDelete, btnClearAll;
+    private MaterialButton btnDelete, btnClearAll;
     private HistoryAdapter historyAdapter;
     private ArrayList<WaterLogInfo> waterLogInfos;
     private int selectedPosition = -1;
@@ -30,77 +29,76 @@ public class History extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        // 1. Fetch user email session right away
         SharedPreferences sharedPref = getSharedPreferences("user_profile", MODE_PRIVATE);
         email = sharedPref.getString("email", "");
 
-        // 2. Initialize layout elements
         btnDashboard = findViewById(R.id.btnDashboard);
         btnHisto = findViewById(R.id.btnHisto);
         btnAcc = findViewById(R.id.btnAcc);
-        btnBack = findViewById(R.id.btnBack);
         btnDelete = findViewById(R.id.btn_delete);
         btnClearAll = findViewById(R.id.btn_clear_all);
         rvHistory = findViewById(R.id.rv_history);
 
         databaseHelper = new DatabaseHelper(this);
+
         waterLogInfos = new ArrayList<>();
 
         historyAdapter = new HistoryAdapter(waterLogInfos, (water, position) -> {
             selectedPosition = position;
-
             btnDelete.setEnabled(true);
-            Toast.makeText(History.this, "Selected: " + water.getWaterIntake(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(History.this, "Selected: " + water.getWaterIntake() + "ml", Toast.LENGTH_SHORT).show();
         });
 
         rvHistory.setLayoutManager(new LinearLayoutManager(this));
         rvHistory.setAdapter(historyAdapter);
 
-        // Initially disable delete button until an item is clicked
         btnDelete.setEnabled(false);
 
-        // 4. Setup Click Listeners
         setupNavigationListeners();
         setupActionListeners();
 
-        // 5. Populate list from SQLite Database
         loadHistoryData();
     }
 
     private void loadHistoryData() {
+        waterLogInfos.clear();
+
         ArrayList<WaterLogInfo> freshLogs = databaseHelper.getAllLogs(email);
-        if (freshLogs == null) {
-            freshLogs = new ArrayList<>();
+        if (freshLogs != null) {
+            waterLogInfos.addAll(freshLogs);
         }
 
-        // Use the adapter's built-in update method to keep animations fluid
-        historyAdapter.updateData(freshLogs);
+        historyAdapter.updateData(waterLogInfos);
 
-        // Reset selected position tracking when data reloads
         selectedPosition = -1;
         btnDelete.setEnabled(false);
     }
 
     private void setupActionListeners() {
-        // BACK BUTTON
-        btnBack.setOnClickListener(v -> finish());
-
-        // DELETE SINGLE LOG BUTTON
         btnDelete.setOnClickListener(v -> {
-            if (selectedPosition != -1 && waterLogInfos != null) {
-                // Get the item using the selected index
-                WaterLogInfo selectedWater = databaseHelper.getAllLogs(email).get(selectedPosition);
+            if (selectedPosition != -1 && selectedPosition < waterLogInfos.size()) {
+                WaterLogInfo selectedWater = waterLogInfos.get(selectedPosition);
 
-                Toast.makeText(this, "Item deleted", Toast.LENGTH_SHORT).show();
-                loadHistoryData(); // Reload UI
+                boolean deleted = databaseHelper.deleteLog(selectedWater.getId());
+
+                if (deleted) {
+                    Toast.makeText(this, "Item deleted", Toast.LENGTH_SHORT).show();
+                    loadHistoryData();
+                } else {
+                    Toast.makeText(this, "Failed to delete item from database", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        // CLEAR ALL LOGS BUTTON
         btnClearAll.setOnClickListener(v -> {
+            boolean cleared = databaseHelper.clearAllLogs(email);
 
-            Toast.makeText(this, "Cleared all water entries", Toast.LENGTH_SHORT).show();
-            loadHistoryData(); // Reload UI
+            if (cleared) {
+                Toast.makeText(this, "Cleared all water entries", Toast.LENGTH_SHORT).show();
+                loadHistoryData();
+            } else {
+                Toast.makeText(this, "Failed to clear entries", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -112,6 +110,5 @@ public class History extends AppCompatActivity {
         btnDashboard.setOnClickListener(v -> {
             startActivity(new Intent(History.this, Dashboard.class));
         });
-
     }
 }
