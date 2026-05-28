@@ -61,11 +61,4 @@ AlertDialog.Builder builder;
         other.setCardBackgroundColor(Color.parseColor("#F0F9FF"));
         gender = selectedGender;
     }
-
-    public void displayMessage(String title, String message){
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
-    }
 }

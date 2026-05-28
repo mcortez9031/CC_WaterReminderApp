@@ -58,15 +58,9 @@ public class AccountView extends AppCompatActivity {
         btnAgeEdit.setOnClickListener(v -> showEditDialog("Edit Your Age", tvAge, true, "age"));
         btnWeightEdit.setOnClickListener(v -> showEditDialog("Edit Your Weight", tvWeight, true, "weight"));
         btnActLvlEdit.setOnClickListener(v -> showEditDialog("Edit Your Activity Level", tvActivityLevel, false, "activity"));
-        btnDashboard.setOnClickListener(view -> {
-            startActivity(new Intent(AccountView.this, Dashboard.class));
-        });
-        btnLogout.setOnClickListener(view -> {
-            logoutUser();
-        });
-        btnHisto.setOnClickListener(view -> {
-            startActivity(new Intent(AccountView.this, History.class));
-        });
+        btnDashboard.setOnClickListener(view -> {startActivity(new Intent(AccountView.this, Dashboard.class));});
+        btnLogout.setOnClickListener(view -> {logoutUser();});
+        btnHisto.setOnClickListener(view -> {startActivity(new Intent(AccountView.this, History.class));});
     }
 
     private void showEditDialog(String title, TextView target, boolean numericInput, String fieldType) {
@@ -135,19 +129,18 @@ public class AccountView extends AppCompatActivity {
                 break;
 
             case "weather":
-                String cleanWeather = val.toLowerCase();
-                if (!cleanWeather.equals("hot") && !cleanWeather.equals("mild") && !cleanWeather.equals("cold")) {
+                String weather= val.toLowerCase();
+                if (!weather.equals("hot") && !weather.equals("mild") && !weather.equals("cold")) {
                     input.setError("Acceptable options: hot, mild, cold");
                     return false;
                 }
                 break;
 
             case "activity":
-                String cleanAct = val.toLowerCase();
-                if (!cleanAct.equals("high") && !cleanAct.equals("very active") &&
-                        !cleanAct.equals("active") && !cleanAct.equals("moderate") &&
-                        !cleanAct.equals("low") && !cleanAct.equals("sedentary")) {
-                    input.setError("Options: sedentary, low, moderate, active, high, very active");
+                String act = val.toLowerCase();
+                if (!act.equals("active") && !act.equals("moderate") &&
+                        !act.equals("light") && !act.equals("rarely")) {
+                    input.setError("Options: rarely, light, moderate, active");
                     return false;
                 }
                 break;
@@ -215,30 +208,31 @@ public class AccountView extends AppCompatActivity {
             water_goal += 250;
         }
 
+
         if (age > 55){
             water_goal *= 0.90;
         } else if (age < 18) {
             water_goal *= 1.10;
         }
 
+
         if(weight <= 0){
             water_goal = 2000;
         }
+
 
         if ("Male".equalsIgnoreCase(gender) || "M".equalsIgnoreCase(gender)) {
             water_goal *= 1.10;
 
             switch (activityLevel.toLowerCase()) {
-                case "high":
-                case "very active":
                 case "active":
                     water_goal *= 1.30;
                     break;
                 case "moderate":
                     water_goal *= 1.15;
                     break;
-                case "low":
-                case "sedentary":
+                case "light":
+                case "rarely":
                     water_goal *= 0.95;
                     break;
             }

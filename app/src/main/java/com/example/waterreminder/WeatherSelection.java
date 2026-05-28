@@ -19,7 +19,7 @@ public class WeatherSelection extends AppCompatActivity {
     Button next;
     CardView hot, cold, mild;
     ImageView back;
-    String tempt = "mild";
+    String tempt = "";
     boolean isClick = false;
 
     @Override

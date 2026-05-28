@@ -118,15 +118,14 @@ public class SignUpPage extends AppCompatActivity {
                 water_goal *= 1.10;
 
                 switch (activity_level.toLowerCase()) {
-                    case "high":
-                    case "very active":
+                    case "active":
                         water_goal *= 1.30;
                         break;
                     case "moderate":
                         water_goal *= 1.15;
                         break;
-                    case "low":
-                    case "sedentary":
+                    case "light":
+                    case "rarely":
                         water_goal *= 0.95;
                         break;
                 }

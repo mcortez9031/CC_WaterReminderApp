@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         boolean logIn = sharedPreferences.getBoolean("isLoggedIn", false);
         if (logIn){
             startActivity(new Intent(MainActivity.this, Dashboard.class));
+            return;
         }
         setContentView(R.layout.activity_main);
 
